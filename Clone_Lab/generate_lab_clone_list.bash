@@ -8,30 +8,35 @@
 
 HIGHLIGHT="\e[01;34m"
 NORMAL='\e[00m'
+CURRENT_DIRECTORY=`pwd`
 
 function update {
   local d="$1"
   if [ -d "$d" ]; then
-    #echo "Looking for $d/.ignore"
+	printf "\nLooking for $d/.ignore\n"
     if [ -e "$d/.ignore" ]; then
-      printf "%b\n" "\n${HIGHLIGHT}Ignoring $d${NORMAL}"
+      printf "%b\n" "\n${HIGHLIGHT}Ignoring $d${NORMAL}\n"
     else
       cd "$d" > /dev/null
       if [ -d ".git" ]; then
-        printf "%b\n" "\n${HIGHLIGHT}Updating `pwd`$NORMAL"
-        git pull
+        printf "${HIGHLIGHT}Working on `pwd`$NORMAL\n"
+		# printf "git clone `git config --get remote.origin.url` %s\n" "${PWD##*/}" >> $CURRENT_DIRECTORY/Lab.txt
+		PRE=`pwd`
+		printf "git clone `git config --get remote.origin.url` ${PRE//$CURRENT_DIRECTORY/}\n" >> $CURRENT_DIRECTORY/Lab.txt
+		# printf "git clone `git config --get remote.origin.url` " >> $CURRENT_DIRECTORY/Lab.txt
+		# printf '%s\n' "${`pwd`//$CURRENT_DIRECTORY/}"
       elif [ ! -d .svn ] && [ ! -d CVS ]; then
         scan *
       fi
       cd .. > /dev/null
     fi
   fi
-  #echo "Exiting update: pwd=`pwd`"
+  printf "Exiting from `pwd`\n"
 }
 
 function scan {
-  #echo "`pwd`"
-  #echo "About to scan $*"
+  # printf "`pwd`"
+  printf "About to scan $*\n"
   for x in $*; do
     update "$x"
   done
@@ -39,9 +44,11 @@ function scan {
 
 function updater {
   if [ "$1" != "" ]; then cd "$1" > /dev/null; fi
-  printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}"
+  printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}\n"
   scan *
 }
+
+rm Lab.txt
 
 if [ "$1" == "" ]; then
   updater
