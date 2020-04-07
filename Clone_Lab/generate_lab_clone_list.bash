@@ -2,9 +2,8 @@
 
 # Update all git directories below current directory or specified directory
 # Skips directories that contain a file called .ignore
-#
-# Using printf insteach of echo -e for Mac OS
-# See http://stackoverflow.com/questions/4435853/echo-outputs-e-parameter-in-bash-scripts-how-can-i-prevent-this
+
+# Check Spaces on Lab_Unclone.txt
 
 HIGHLIGHT="\e[01;34m"
 NORMAL='\e[00m'
@@ -21,13 +20,18 @@ function update {
       if [ -d ".git" ]; then
         printf "${HIGHLIGHT}Working on `pwd`$NORMAL\n"
 		# printf "git clone `git config --get remote.origin.url` %s\n" "${PWD##*/}" >> $CURRENT_DIRECTORY/Lab.txt
-		PRE=`pwd`
-		printf "git clone `git config --get remote.origin.url` ${PRE//$CURRENT_DIRECTORY/}\n" >> $CURRENT_DIRECTORY/Lab.txt
-		# printf "git clone `git config --get remote.origin.url` " >> $CURRENT_DIRECTORY/Lab.txt
-		# printf '%s\n' "${`pwd`//$CURRENT_DIRECTORY/}"
+		local REMOTE_URL=`git config --get remote.origin.url`
+		local PRESENT_DIRECTORY=`pwd`
+		if [ ! -z $REMOTE_URL ]; then
+			printf "git clone $(perl -MURI::Escape -e 'print uri_unescape($ARGV[0])' "$REMOTE_URL") ${PRESENT_DIRECTORY//"$CURRENT_DIRECTORY/"/}\n" >> $CURRENT_DIRECTORY/Lab.txt
+		else
+			printf "${PRESENT_DIRECTORY//"$CURRENT_DIRECTORY/"/}\n" >> $CURRENT_DIRECTORY/Lab_Unclone.txt
+		fi
+		# check for remote url repos
       elif [ ! -d .svn ] && [ ! -d CVS ]; then
         scan *
       fi
+		# list non-git directories - filter ide repo folders
       cd .. > /dev/null
     fi
   fi
@@ -48,7 +52,13 @@ function updater {
   scan *
 }
 
-rm Lab.txt
+if test -f "Lab.txt"; then
+	rm Lab.txt
+fi
+
+if test -f "Lab_Unclone.txt"; then
+	rm Lab.txt
+fi
 
 if [ "$1" == "" ]; then
   updater
