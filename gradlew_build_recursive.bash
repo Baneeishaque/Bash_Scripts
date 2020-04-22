@@ -1,12 +1,6 @@
 #!/bin/bash
 
-# From ScalaCourses.com Introduction to Play Framework with Scala course
-
-# Update all git directories below current directory or specified directory
 # Skips directories that contain a file called .ignore
-#
-# Using printf insteach of echo -e for Mac OS
-# See http://stackoverflow.com/questions/4435853/echo-outputs-e-parameter-in-bash-scripts-how-can-i-prevent-this
 
 HIGHLIGHT="\e[01;34m"
 NORMAL='\e[00m'
@@ -21,8 +15,6 @@ function update {
       cd "$d" > /dev/null
       if [ -f "gradlew" ]; then
         printf "%b\n" "\n${HIGHLIGHT}Updating `pwd`$NORMAL"
-        #dos2unix gradlew
-        # chmod +x gradlew
         ./gradlew build
       elif [ ! -d .svn ] && [ ! -d CVS ]; then
         scan *

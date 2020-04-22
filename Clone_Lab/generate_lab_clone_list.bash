@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Update all git directories below current directory or specified directory
 # Skips directories that contain a file called .ignore
 
 # Check Spaces on Lab_Unclone.txt

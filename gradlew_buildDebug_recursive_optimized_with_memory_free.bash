@@ -16,6 +16,7 @@ function update {
       if [ -f "gradlew" ]; then
         printf "%b\n" "\n${HIGHLIGHT}Updating `pwd`$NORMAL"
         ./gradlew buildDebug --build-cache --configure-on-demand --no-parallel --max-workers=1
+		killall java
       elif [ ! -d .svn ] && [ ! -d CVS ]; then
         scan *
       fi
