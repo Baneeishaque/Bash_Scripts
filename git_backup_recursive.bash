@@ -20,7 +20,8 @@ function update {
 			printf "%b\n" "\n${HIGHLIGHT}Processing `pwd`$NORMAL" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 			
 			# TODO : Check for pulll permission
-			git pull | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+			git fetch --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+			git pull --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 			
 			if [[ `git status --porcelain` ]]; then
 				
@@ -28,6 +29,12 @@ function update {
 				git status | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 				printf "`pwd`\n" >> $CURRENT_DIRECTORY/git_folders_with_changes.txt
 			
+				# TODO : Check for own repository
+				# git ls-remote /url/remote/repo
+				# git add . | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+				# git commit -m "$now" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+				# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+
 			# else
 			
 				# No changes
@@ -35,12 +42,21 @@ function update {
 			fi
 			
 			# git log origin/master..HEAD
+			if [[ `git log --branches --not --remotes` ]]; then
+				
+				# Changes
+				git log --branches --not --remotes | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+				printf "`pwd`\n" >> $CURRENT_DIRECTORY/git_folders_with_unpushed_commits.txt
 			
-			# git ls-remote /url/remote/repo
-			# TODO : Check for own repository
-			# git add . | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-			# git commit -m "$now" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-			# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+				# TODO : Check for own repository
+				# git ls-remote /url/remote/repo
+				# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+
+			# else
+			
+				# No changes
+				
+			fi
 			
 		elif [ ! -d .svn ] && [ ! -d CVS ]; then
 
