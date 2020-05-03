@@ -20,10 +20,15 @@ function update {
         git status | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 		git pull | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 		# TODO : Consider status
+		# TODO : Check for own repository
 		git add . | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 		git commit -m "$now" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 		git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
       elif [ ! -d .svn ] && [ ! -d CVS ]; then
+		printf "%b\n" "\n${HIGHLIGHT}Non Git Folder : `pwd`$NORMAL" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+		# TODO : Avoid Android_Studio like place holder folders
+		printf "`pwd`\n" >> $CURRENT_DIRECTORY/non_git_folders.txt
+		github .
         scan *
       fi
       cd .. > /dev/null
