@@ -56,7 +56,7 @@ if test -f "Lab.txt"; then
 fi
 
 if test -f "Lab_Unclone.txt"; then
-	rm Lab.txt
+	rm Lab_Unclone.txt
 fi
 
 if [ "$1" == "" ]; then
