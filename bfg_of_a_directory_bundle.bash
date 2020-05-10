@@ -1,6 +1,6 @@
 shopt -s globstar
 
-for i in /c/GitLab_BFG/db_backups/**/*
+for i in /c/GitLab_BFG_Bundle/db_backups/**/*
 do
 #  echo $i
 	if [ -f "$i" ];
@@ -11,7 +11,7 @@ do
         # printf "Filesize: %s\n" "$(du -b "$i" | awk '{print $1}')"
         # some other command can go here
         # printf "\n\n"
-		git reflog expire --expire=now --all
-		git gc --prune=now --aggressive
     fi
 done
+
+git reflog expire --expire=now --all && git gc --prune=now --aggressive
