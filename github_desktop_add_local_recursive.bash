@@ -22,7 +22,7 @@ function update {
 			if [ -d ".git" ]; then
 				
 				printf "%b\n" "\n${HIGHLIGHT}Updating `pwd`$NORMAL"
-				github `pwd`
+				github.bat `pwd`
 			elif [ ! -d .svn ] && [ ! -d CVS ]; then
 				scan *
 			fi
