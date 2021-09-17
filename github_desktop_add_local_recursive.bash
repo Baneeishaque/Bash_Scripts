@@ -21,7 +21,7 @@ function update {
 			cd "$d" > /dev/null
 			if [ -d ".git" ]; then
 				
-				printf "%b\n" "\n${HIGHLIGHT}Updating `pwd`$NORMAL"
+				printf "%b\n" "\n${HIGHLIGHT}Adding `pwd`$NORMAL to Github Desktop"
 				github.bat `pwd`
 			elif [ ! -d .svn ] && [ ! -d CVS ]; then
 				scan *
