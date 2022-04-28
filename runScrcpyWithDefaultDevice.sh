@@ -1,0 +1,2 @@
+. /opt/activateHomeBrew.sh
+scrcpy
