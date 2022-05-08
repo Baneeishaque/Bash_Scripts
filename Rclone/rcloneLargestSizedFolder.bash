@@ -6,7 +6,7 @@ while read -r i; do
     # echo "$i2"
     if [ "${i: -1}" == "/" ]; then
         # echo "$i"
-        if [[ "$i" == "VMware Images/" ]]
+        if [ "$i" == "VMware Images/" ]
         then
             while read -r j; do
                 # echo "$j"
