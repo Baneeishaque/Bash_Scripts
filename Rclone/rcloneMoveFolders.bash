@@ -1,12 +1,13 @@
 rclone lsf Blomp-Banee-Gmail-Drive: | while read -r i; do
     # echo "$i"
-    if [ "$i" != "Windows XP SP2/" ] && [ "$i" != "genymotion_vbox86p_10.0_210203_090317.ova" ]; then
+    if [ "$i" != "Windows XP SP2/" ] && [ "$i" != "genymotion_vbox86p_10.0_210203_090317.ova" ] && [ "$i" != "VMware Images/" ]; then
         i2=${i::-1}
         # echo "$i2"
         rclone lsf Blomp-Banee-Gmail-Drive:"$i2" | while read -r j; do
             # echo "$j"
-            rclone move "Blomp-Banee-Gmail-Drive:$i2/$j" "Blomp-Banee-Gmail-Drive:VMware Images/$i2 VMware/" --dry-run --log-level DEBUG
-            # rclone move "Blomp-Banee-Gmail-Drive:$i2/$j" "Blomp-Banee-Gmail-Drive:VMware Images/$i2 VMware/"
+            # rclone move "Blomp-Banee-Gmail-Drive:$i2/$j" "Blomp-Banee-Gmail-Drive:VMware Images/$i2 VMware/" --dry-run --log-level DEBUG
+            # rclone move "Blomp-Banee-Gmail-Drive:$i2/$j" "Blomp-Banee-Gmail-Drive:VMware Images/$i2 VMware/" --dry-run
+            rclone move "Blomp-Banee-Gmail-Drive:$i2/$j" "Blomp-Banee-Gmail-Drive:VMware Images/$i2 VMware/"
         done
     fi
 done
