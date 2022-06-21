@@ -6,6 +6,8 @@ rclone sync Data/Misc/Blomp-Banee2-Gmail-Drive/ Blomp-Banee2-Gmail-Drive: --prog
 
 rclone sync Data/Misc/Blomp-Banee3-Gmail-Drive/ Blomp-Banee3-Gmail-Drive: --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Blomp-Banee3-Gmail-Drive-filter.txt --dry-run
 
+rclone sync Data/Misc/Blomp-Banee4-Gmail-Drive/ Blomp-Banee4-Gmail-Drive: --progress --progress-terminal-title --human-readable --dry-run
+
 echo "GDrive-Banee3"
 echo "----------------"
 echo "rclone sync --progress --progress-terminal-title --human-readable Data/Misc/Baneeishaque3-GDrive/ GDrive-Banee3: --fast-list --filter-from Data/Labs/Lab_Banee/rclone/FreeFileSync-filter.txt --dry-run"
@@ -35,6 +37,8 @@ rclone sync Data/Misc/Baneeishaque-GPhotos/album/ GPhotos-Banee:album/ --progres
 rclone sync Data/Misc/Baneeishaque2-GPhotos/album/ GPhotos-Banee2:album/ --progress --progress-terminal-title --human-readable --dry-run
 
 rclone sync Data/Misc/Baneeishaque3-GPhotos/album/ GPhotos-Banee3:album/ --progress --progress-terminal-title --human-readable --dry-run
+
+rclone sync Data/Misc/Baneeishaque7-GPhotos/album/ GPhotos-Banee7:album/ --progress --progress-terminal-title --human-readable --dry-run
 
 rclone sync Data/Misc/Mega-Banee-Gmail-Drive/ Mega-Banee-Gmail: --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Mega-Banee-Gmail-root-filter.txt --dry-run
 
