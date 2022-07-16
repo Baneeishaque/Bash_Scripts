@@ -18,9 +18,9 @@ pause
 
 echo "GDrive-Banee4"
 echo "----------------"
-echo "rclone sync --progress --progress-terminal-title --human-readable Data/Misc/Baneeishaque4-GDrive/ GDrive-Banee4: --fast-list --filter-from Data/Labs/Lab_Banee/rclone/FreeFileSync-filter.txt --dry-run"
+echo "rclone sync --progress --progress-terminal-title --human-readable Data/Misc/Baneeishaque4-GDrive/ GDrive-Banee4: --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/FreeFileSync-filter.txt --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/GDrive-Banee4-root-filter.txt --dry-run"
 echo "----------------"
-rclone sync --progress --progress-terminal-title --human-readable Data/Misc/Baneeishaque4-GDrive/ GDrive-Banee4: --fast-list --filter-from Data/Labs/Lab_Banee/rclone/FreeFileSync-filter.txt --dry-run
+rclone sync --progress --progress-terminal-title --human-readable Data/Misc/Baneeishaque4-GDrive/ GDrive-Banee4: --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/FreeFileSync-filter.txt --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/GDrive-Banee4-root-filter.txt --dry-run
 
 pause
 

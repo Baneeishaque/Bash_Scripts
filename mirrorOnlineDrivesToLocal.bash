@@ -64,9 +64,9 @@ rclone sync --progress --progress-terminal-title --human-readable GDrive-Banee: 
 
 echo "GDrive-Banee2"
 echo "----------------"
-echo "rclone sync --progress --progress-terminal-title --human-readable GDrive-Banee2: Data/Misc/Baneeishaque2-GDrive/ --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/FreeFileSync-filter.txt --dry-run"
+echo "rclone sync --progress --progress-terminal-title --human-readable GDrive-Banee2: Data/Misc/Baneeishaque2-GDrive/ --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/FreeFileSync-filter.txt --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/GDrive-Banee2-root-filter.txt --dry-run"
 echo "----------------"
-rclone sync --progress --progress-terminal-title --human-readable GDrive-Banee2: Data/Misc/Baneeishaque2-GDrive/ --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/FreeFileSync-filter.txt --dry-run
+rclone sync --progress --progress-terminal-title --human-readable GDrive-Banee2: Data/Misc/Baneeishaque2-GDrive/ --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/FreeFileSync-filter.txt --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/GDrive-Banee2-root-filter.txt --dry-run
 
 echo "GDrive-Banee3"
 echo "----------------"
@@ -76,9 +76,9 @@ rclone sync --progress --progress-terminal-title --human-readable GDrive-Banee3:
 
 echo "GDrive-Banee4"
 echo "----------------"
-echo "rclone sync --progress --progress-terminal-title --human-readable GDrive-Banee4: Data/Misc/Baneeishaque4-GDrive/ --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/FreeFileSync-filter.txt --dry-run"
+echo "rclone sync --progress --progress-terminal-title --human-readable GDrive-Banee4: Data/Misc/Baneeishaque4-GDrive/ --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/FreeFileSync-filter.txt --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/GDrive-Banee4-root-filter.txt --dry-run"
 echo "----------------"
-rclone sync --progress --progress-terminal-title --human-readable GDrive-Banee4: Data/Misc/Baneeishaque4-GDrive/ --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/FreeFileSync-filter.txt --dry-run
+rclone sync --progress --progress-terminal-title --human-readable GDrive-Banee4: Data/Misc/Baneeishaque4-GDrive/ --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/FreeFileSync-filter.txt --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/GDrive-Banee4-root-filter.txt --dry-run
 
 echo "GDrive-Banee5"
 echo "----------------"
@@ -216,6 +216,13 @@ echo "----------------"
 echo "rclone sync Storj-Banee-Gmail: Data/Misc/Storj-Banee-Gmail-Drive/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Storj-Banee-Gmail-root-filter.txt --dry-run"
 echo "----------------"
 rclone sync Storj-Banee-Gmail: Data/Misc/Storj-Banee-Gmail-Drive/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Storj-Banee-Gmail-root-filter.txt --dry-run
+
+
+echo "Storj-Banee2-Gmail"
+echo "----------------"
+echo "rclone sync Storj-Banee2-Gmail: Data/Misc/Storj-Banee2-Gmail-Drive/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Storj-Banee-Gmail-root-filter.txt --dry-run"
+echo "----------------"
+rclone sync Storj-Banee2-Gmail: Data/Misc/Storj-Banee2-Gmail-Drive/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Storj-Banee-Gmail-root-filter.txt --dry-run
 
 echo "Wozi-info-tech-com"
 echo "----------------"
