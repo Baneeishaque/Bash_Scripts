@@ -44,6 +44,10 @@ rclone sync Data/Misc/Mega-Banee-Gmail-Drive/ Mega-Banee-Gmail: --progress --pro
 
 rclone sync Data/Misc/Mega-Banee2-Gmail-Drive/ Mega-Banee2-Gmail: --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Mega-Banee2-Gmail-root-filter.txt --dry-run
 
+echo "Avita-Linux -> Mega-Banee3-Gmail"
+echo "----------------"
+echo "rclone sync Data/Misc/Mega-Banee3-Gmail-Drive/ Mega-Banee3-Gmail: --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Mega-Banee3-Gmail-root-filter.txt --dry-run"
+echo "----------------"
 rclone sync Data/Misc/Mega-Banee3-Gmail-Drive/ Mega-Banee3-Gmail: --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Mega-Banee3-Gmail-root-filter.txt --dry-run
 
 rclone sync Data/Misc/Mega-Banee4-Gmail-Drive/ Mega-Banee4-Gmail: --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Mega-Banee4-Gmail-root-filter.txt --dry-run

@@ -164,6 +164,8 @@ echo "----------------"
 rclone sync Mega-Banee2-Gmail: Data/Misc/Mega-Banee2-Gmail-Drive/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Mega-Banee2-Gmail-root-filter.txt --dry-run
 
 echo "Mega-Banee3-Gmail"
+
+echo "Mega-Banee3-Gmail -> Avita Linux"
 echo "----------------"
 echo "rclone sync Mega-Banee3-Gmail: Data/Misc/Mega-Banee3-Gmail-Drive/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Mega-Banee3-Gmail-root-filter.txt --dry-run"
 echo "----------------"
