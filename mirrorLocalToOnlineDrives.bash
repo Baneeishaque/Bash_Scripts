@@ -58,6 +58,12 @@ rclone sync Data/Misc/Mega-Banee6-Gmail-Drive/ Mega-Banee6-Gmail: --progress --p
 
 rclone sync Data/Misc/Mega-Banee7-Gmail-Drive/ Mega-Banee7-Gmail: --progress --progress-terminal-title --human-readable --dry-run
 
+echo "Avita-Linux -> Mega-Banee-Hotmail"
+echo "----------------"
+echo "rclone sync Data/Misc/Mega-Banee-Hotmail-Drive/ Mega-Banee-Hotmail: --progress --progress-terminal-title --human-readable --dry-run"
+echo "----------------"
+rclone sync Data/Misc/Mega-Banee-Hotmail-Drive/ Mega-Banee-Hotmail: --progress --progress-terminal-title --human-readable --dry-run
+
 rclone sync Data/Misc/Miles-5GB-public_html/ Miles-5GB:public_html --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Miles-5GB-public_html-filter.txt --dry-run
 
 rclone sync Data/Misc/One-Drive-Banee-Hotmail-Drive/ One-Drive-Banee-Hotmail: --progress --progress-terminal-title --human-readable --dry-run

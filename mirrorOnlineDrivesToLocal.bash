@@ -195,6 +195,12 @@ echo "rclone sync Mega-Banee7-Gmail: Data/Misc/Mega-Banee7-Gmail-Drive/ --progre
 echo "----------------"
 rclone sync Mega-Banee7-Gmail: Data/Misc/Mega-Banee7-Gmail-Drive/ --progress --progress-terminal-title --human-readable --dry-run
 
+echo "Mega-Banee-Hotmail"
+echo "----------------"
+echo "rclone sync Mega-Banee-Hotmail: Data/Misc/Mega-Banee-Hotmail-Drive/ --progress --progress-terminal-title --human-readable --dry-run"
+echo "----------------"
+rclone sync Mega-Banee-Hotmail: Data/Misc/Mega-Banee-Hotmail-Drive/ --progress --progress-terminal-title --human-readable --dry-run
+
 echo "Miles-5GB:public_html"
 echo "----------------"
 echo "rclone sync Miles-5GB:public_html Data/Misc/Miles-5GB-public_html/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Miles-5GB-public_html-filter.txt --dry-run"
