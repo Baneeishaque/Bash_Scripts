@@ -225,7 +225,6 @@ echo "rclone sync Storj-Banee-Gmail: Data/Misc/Storj-Banee-Gmail-Drive/ --progre
 echo "----------------"
 rclone sync Storj-Banee-Gmail: Data/Misc/Storj-Banee-Gmail-Drive/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Storj-Banee-Gmail-root-filter.txt --dry-run
 
-
 echo "Storj-Banee2-Gmail"
 echo "----------------"
 echo "rclone sync Storj-Banee2-Gmail: Data/Misc/Storj-Banee2-Gmail-Drive/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Storj-Banee-Gmail-root-filter.txt --dry-run"
