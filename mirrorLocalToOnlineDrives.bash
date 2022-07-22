@@ -28,7 +28,7 @@ echo "GDrive-Banee5"
 echo "----------------"
 echo "rclone sync --progress --progress-terminal-title --human-readable Data/Misc/Baneeishaque5-GDrive/ GDrive-Banee5: --fast-list --dry-run"
 echo "----------------"
-rclone sync --progress --progress-terminal-title --human-readable Data/Misc/Baneeishaque5-GDrive/ GDrive-Banee5: --fast-list --dry-run
+rclone sync --progress --progress-terminal-title --human-readable Data/Misc/Baneeishaque5-GDrive/ GDrive-Banee5: --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/FreeFileSync-filter.txt --dry-run
 
 rclone sync --progress --progress-terminal-title --human-readable Data/Misc/Baneeishaque6-GDrive/ GDrive-Banee6: --fast-list --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/GDrive-Banee6-root-filter.txt --dry-run
 
