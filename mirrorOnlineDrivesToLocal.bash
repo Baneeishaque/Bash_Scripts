@@ -65,12 +65,36 @@ rclone sync Dropbox-Banee-Gmail: Data/Misc/Dropbox/ --progress --progress-termin
 
 read -r -s -p $'Press enter to continue...'
 
-echo "EShopees-SFTP:/var/www/"
+echo "EShopees-SFTP -> Avita Linux"
 echo "----------------"
-echo "echo rclone sync EShopees-SFTP:/var/www/ Data/Misc/To-DK/EShopees/EShopees-var-www/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-filter.txt --dry-run"
+echo "rclone sync EShopees-SFTP: Data/Misc/EShopees-Server-Mirror/EShopees-files/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-filter.txt --dry-run"
 echo "----------------"
-echo rclone sync EShopees-SFTP:/var/www/ Data/Misc/To-DK/EShopees/EShopees-var-www/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-filter.txt --dry-run
-echo rclone check EShopees-SFTP:/var/www/ Data/Misc/To-DK/EShopees/EShopees-var-www/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-filter.txt --differ Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-differ.txt --error Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-error.txt --missing-on-dst Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-missing-on-dst.txt --missing-on-src Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-missing-on-src.txt
+rclone sync EShopees-SFTP: Data/Misc/EShopees-Server-Mirror/EShopees-files/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-filter.txt --dry-run
+
+echo "----------------"
+echo "rclone sync EShopees-SFTP-var: Data/Misc/EShopees-Server-Mirror/EShopees-var/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-var-filter.txt --dry-run"
+echo "----------------"
+rclone sync EShopees-SFTP-var: Data/Misc/EShopees-Server-Mirror/EShopees-var/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-var-filter.txt --dry-run
+
+echo "----------------"
+echo "rclone check EShopees-SFTP-var:www/eshop/ Data/Misc/EShopees-Server-Mirror/EShopees-var/www/eshop/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-var-www-eshop-filter.txt --differ EShopees-SFTP-var-www-eshop-differ.txt --error EShopees-SFTP-var-www-eshop-error.txt --missing-on-src EShopees-SFTP-var-www-eshop-missing-on-src.txt --missing-on-dst EShopees-SFTP-var-www-eshop-missing-on-dst.txt --match EShopees-SFTP-var-www-eshop-match.txt"
+echo "----------------"
+rclone check EShopees-SFTP-var:www/eshop/ Data/Misc/EShopees-Server-Mirror/EShopees-var/www/eshop/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-var-www-eshop-filter.txt --differ EShopees-SFTP-var-www-eshop-differ.txt --error EShopees-SFTP-var-www-eshop-error.txt --missing-on-src EShopees-SFTP-var-www-eshop-missing-on-src.txt --missing-on-dst EShopees-SFTP-var-www-eshop-missing-on-dst.txt --match EShopees-SFTP-var-www-eshop-match.txt
+
+echo "----------------"
+echo "rclone sync EShopees-SFTP-var:www/eshop/ Data/Misc/EShopees-Server-Mirror/EShopees-var/www/eshop/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-var-www-eshop-filter.txt --dry-run"
+echo "----------------"
+rclone sync EShopees-SFTP-var:www/eshop/ Data/Misc/EShopees-Server-Mirror/EShopees-var/www/eshop/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-var-www-eshop-filter.txt --dry-run
+
+echo "----------------"
+echo "rclone check EShopees-SFTP-var:www/eshopees-website Data/Misc/EShopees-Server-Mirror/EShopees-var/www/eshopees-website --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-var-www-eshop-website-filter.txt --differ EShopees-SFTP-var-www-eshopees-website-differ.txt --error EShopees-SFTP-var-www-eshopees-website-error.txt --missing-on-src EShopees-SFTP-var-www-eshopees-website-missing-on-src.txt --missing-on-dst EShopees-SFTP-var-www-eshopees-website-missing-on-dst.txt --match EShopees-SFTP-var-www-eshopees-website-match.txt"
+echo "----------------"
+rclone check EShopees-SFTP-var:www/eshopees-website Data/Misc/EShopees-Server-Mirror/EShopees-var/www/eshopees-website --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-var-www-eshop-website-filter.txt --differ EShopees-SFTP-var-www-eshopees-website-differ.txt --error EShopees-SFTP-var-www-eshopees-website-error.txt --missing-on-src EShopees-SFTP-var-www-eshopees-website-missing-on-src.txt --missing-on-dst EShopees-SFTP-var-www-eshopees-website-missing-on-dst.txt --match EShopees-SFTP-var-www-eshopees-website-match.txt
+
+echo "----------------"
+echo "rclone sync EShopees-SFTP-var:www/eshopees-website/ Data/Misc/EShopees-Server-Mirror/EShopees-var/www/eshopees-website/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-var-www-eshop-website-filter.txt --dry-run"
+echo "----------------"
+rclone sync EShopees-SFTP-var:www/eshopees-website/ Data/Misc/EShopees-Server-Mirror/EShopees-var/www/eshopees-website/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/EShopees-SFTP-var-www-eshop-website-filter.txt --dry-run
 
 read -r -s -p $'Press enter to continue...'
 
