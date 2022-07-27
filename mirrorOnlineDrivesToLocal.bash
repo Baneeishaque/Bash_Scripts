@@ -321,10 +321,10 @@ read -r -s -p $'Press enter to continue...'
 
 echo "Wozi-info-tech-com"
 echo "----------------"
-echo "echo rclone sync Wozi-info-tech-com: Data/Misc/To-DK/Wozi-info-tech-com-root/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-root-filter.txt --dry-run"
+echo "echo rclone sync Wozi-info-tech-com: Data/Misc/Wozi-Server-Mirror/Wozi-info-tech-com-root/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-root-filter.txt --dry-run"
 echo "----------------"
-echo rclone sync Wozi-info-tech-com: Data/Misc/To-DK/Wozi-info-tech-com-root/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-root-filter.txt --dry-run
-echo rclone check Wozi-info-tech-com: Data/Misc/To-DK/Wozi-info-tech-com-root/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-root-filter.txt --differ Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-differ.txt --error Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-error.txt --missing-on-dst Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-missing-on-dst.txt --missing-on-src Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-missing-on-src.txt
+echo rclone sync Wozi-info-tech-com: Data/Misc/Wozi-Server-Mirror/Wozi-info-tech-com-root/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-root-filter.txt --dry-run
+echo rclone check Wozi-info-tech-com: Data/Misc/Wozi-Server-Mirror/Wozi-info-tech-com-root/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-root-filter.txt --differ Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-differ.txt --error Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-error.txt --missing-on-dst Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-missing-on-dst.txt --missing-on-src Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Wozi-info-tech-com-missing-on-src.txt
 
 read -r -s -p $'Press enter to continue...'
 
