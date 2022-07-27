@@ -335,19 +335,3 @@ echo "----------------"
 rclone sync Yandex-Banee: Data/Misc/Yandex-Banee-Gmail-Drive/ --progress --progress-terminal-title --human-readable --dry-run
 
 read -r -s -p $'Press enter to continue...'
-
-echo "Telegram Desktop Movies to Storj-Banee-Gmail"
-echo "----------------"
-echo "rclone copy "/home/dk/Downloads/Telegram Desktop/" Storj-Banee-Gmail:films/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Telegram-Desktop-Movies-to-Storj-filter.txt --dry-run"
-echo "----------------"
-rclone copy "/home/dk/Downloads/Telegram Desktop/" Storj-Banee-Gmail:films/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Telegram-Desktop-Movies-to-Storj-filter.txt --dry-run
-
-read -r -s -p $'Press enter to continue...'
-
-echo "Telegram Desktop Movies to Storj-Banee2-Gmail"
-echo "----------------"
-echo "rclone copy "/home/dk/Downloads/Telegram Desktop/" Storj-Banee2-Gmail:films/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Telegram-Desktop-Movies-to-Storj-Banee-Gmail-filter.txt --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Telegram-Desktop-Movies-to-Storj-Banee2-Gmail-filter.txt --dry-run"
-echo "----------------"
-rclone copy "/home/dk/Downloads/Telegram Desktop/" Storj-Banee2-Gmail:films/ --progress --progress-terminal-title --human-readable --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Telegram-Desktop-Movies-to-Storj-Banee-Gmail-filter.txt --filter-from Data/Labs/Lab_Banee/Misc/configurations-private/rclone/Telegram-Desktop-Movies-to-Storj-Banee2-Gmail-filter.txt --dry-run
-
-read -r -s -p $'Press enter to continue...'
