@@ -1,0 +1,11 @@
+vscode.json
+PKief.material-icon-theme
+vscode.shellscript
+foxundermoon.shell-format
+vscode.git-base
+vscode.git
+mhutchie.git-graph
+donjayamanne.githistory
+hashhar.gitattributes
+GitHub.copilot-nightly
+eamodio.gitlens
