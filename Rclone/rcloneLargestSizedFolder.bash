@@ -6,13 +6,12 @@ while read -r i; do
     # echo "$i2"
     if [ "${i: -1}" == "/" ]; then
         # echo "$i"
-        if [ "$i" == "VMware Images/" ]
-        then
+        if [ "$i" == "VMware Images/" ]; then
             while read -r j; do
                 # echo "$j"
                 if [ "${j: -1}" == "/" ]; then
                     # echo "$j"
-                    current_file_size=`rclone size "Blomp-Banee-Gmail-Drive:VMware Images/$j" --json | jq -r '.bytes'`
+                    current_file_size=$(rclone size "Blomp-Banee-Gmail-Drive:VMware Images/$j" --json | jq -r '.bytes')
                     # echo $current_file_size
                     # exit 0
                     if [ "$current_file_size" -ge "$largest_size" ]; then
@@ -31,13 +30,13 @@ while read -r i; do
                     # exit 0
                     # break
                 fi
-            done <<< $(rclone lsf Blomp-Banee-Gmail-Drive:"$i")
+            done <<<$(rclone lsf Blomp-Banee-Gmail-Drive:"$i")
             # echo "$largest_folder : $largest_size"
             # exit 0
             # break
         else
             # echo "$i"
-            current_file_size=`rclone size "Blomp-Banee-Gmail-Drive:$i" --json | jq -r '.bytes'`
+            current_file_size=$(rclone size "Blomp-Banee-Gmail-Drive:$i" --json | jq -r '.bytes')
             # echo $current_file_size
             # exit 0
             if [ "$current_file_size" -ge "$largest_size" ]; then
@@ -57,6 +56,6 @@ while read -r i; do
             # break
         fi
     fi
-done <<< $(rclone lsf Blomp-Banee-Gmail-Drive:)
+done <<<$(rclone lsf Blomp-Banee-Gmail-Drive:)
 # exit 0
 echo "Largest folder: $largest_folder, size: $(echo $largest_size | numfmt --to=iec)"
