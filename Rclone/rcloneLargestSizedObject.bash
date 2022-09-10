@@ -26,6 +26,6 @@ while read -r i; do
     echo "$remote:$i2 : $(echo $current_file_size | numfmt --to=iec)"
     # exit 0
     # break
-done <<<$(rclone ls $remote: --config $rcloneConfiguration)
+done <<<$(rclone ls $remote: --config $rcloneConfiguration --min-size 1G)
 # exit 0
 echo "Largest file: $largest_file, size: $(echo $largest_size | numfmt --to=iec)"
