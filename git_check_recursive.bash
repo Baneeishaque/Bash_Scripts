@@ -7,30 +7,37 @@ NORMAL='\e[00m'
 now=`date`
 CURRENT_DIRECTORY=`pwd`
 
+# TODO : Change full paths to variables
+rm $CURRENT_DIRECTORY/git_backup_recursive.log
+rm $CURRENT_DIRECTORY/git_folders.txt
+rm $CURRENT_DIRECTORY/git_folders_with_changes.txt
+rm $CURRENT_DIRECTORY/git_folders_with_unpushed_commits.txt
+rm $CURRENT_DIRECTORY/non_git_folders.txt
+
 function update {
 
 	local d="$1"
 
 	if [ -d "$d" ]; then
-		
+
 		cd "$d" > /dev/null
 
 		if [ -d ".git" ]; then
 
 			printf "`pwd`\n" >> $CURRENT_DIRECTORY/git_folders.txt
-			
+
 			printf "%b\n" "\n${HIGHLIGHT}Processing `pwd`$NORMAL" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-			
+
 			# TODO : Check for pulll permission
 			# git fetch --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 			# git pull --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-			
+
 			if [[ `git status --porcelain` ]]; then
-				
+
 				# Changes
 				git status | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 				printf "`pwd`\n" >> $CURRENT_DIRECTORY/git_folders_with_changes.txt
-			
+
 				# TODO : Check for own repository
 				# git ls-remote /url/remote/repo
 				# git add . | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
@@ -38,28 +45,28 @@ function update {
 				# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 
 			# else
-			
+
 				# No changes
-				
+
 			fi
-			
+
 			# git log origin/master..HEAD
 			if [[ `git log --branches --not --remotes` ]]; then
-				
+
 				# Changes
 				git log --branches --not --remotes | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 				printf "`pwd`\n" >> $CURRENT_DIRECTORY/git_folders_with_unpushed_commits.txt
-			
+
 				# TODO : Check for own repository
 				# git ls-remote /url/remote/repo
 				# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 
 			# else
-			
+
 				# No changes
-				
+
 			fi
-			
+
 		elif [ ! -d .svn ] && [ ! -d CVS ]; then
 
 			printf "%b\n" "\n${HIGHLIGHT}Non Git Folder : `pwd`$NORMAL" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
@@ -77,7 +84,7 @@ function update {
 				# scan *
 
 			# fi
-			
+
 			# TODO : Avoid Android_Studio like place holder folders
 			printf "`pwd`\n" >> $CURRENT_DIRECTORY/non_git_folders.txt
 			# github .
@@ -90,7 +97,7 @@ function update {
 }
 
 function scan {
-	
+
 	#echo "`pwd`"
 	#echo "About to scan $*"
 	for x in $*; do
@@ -99,7 +106,7 @@ function scan {
 }
 
 function updater {
-	
+
 	if [ "$1" != "" ]; then cd "$1" > /dev/null; fi
 	printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 	scan *
