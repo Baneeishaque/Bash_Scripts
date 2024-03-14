@@ -18,11 +18,11 @@ function invoke_git_handler() {
 	local pause="$3"
 	local is_full_interactive_wait="$4"
 
-	if [ $handler == "github" ]; then
+	if [ "$handler" == "github" ]; then
 		invoke_client "github" $dir $pause $is_full_interactive_wait
-	elif [ $handler == "fork" ]; then
+	elif [ "$handler" == "fork" ]; then
 		invoke_client "fork.exe" $dir $pause $is_full_interactive_wait
-	elif [ $handler == "both" ]; then
+	elif [ "$handler" == "both" ]; then
 		invoke_client "github" $dir $pause $is_full_interactive_wait
 		invoke_client "fork.exe" $dir $pause $is_full_interactive_wait
 	else
@@ -43,9 +43,9 @@ function invoke_client() {
 	local is_full_interactive_wait="$4"
 
 	$client "$dir"
-	if [ $is_full_interactive_wait == "true" ]; then
+	if [ "$is_full_interactive_wait" == "true" ]; then
 		wait $!
-	elif [ $pause == "true" ]; then
+	elif [ "$pause" == "true" ]; then
 		pause 'Press [Enter] key to continue...'
 	fi
 }
@@ -83,53 +83,53 @@ function update() {
 		if [ -d ".git" ]; then
 			printf "`pwd`\n" >> $CURRENT_DIRECTORY/git_folders.txt
 			printf "%b\n" "\n${HIGHLIGHT}Processing `pwd`$NORMAL" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-			
+
 			# TODO : Check for pulll permission
-			git fetch --all $([ $include_sub_modules == "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-git pull --all $([ $include_sub_modules == "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-			
-			if [ $is_full_interactive_wait == "true" ]; then
+			git fetch --all $([ "$include_sub_modules" == "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+git pull --all $([ "$include_sub_modules" == "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+
+			if [ "$is_full_interactive_wait" == "true" ]; then
 				invoke_git_handler "`pwd`" $handler $pause $is_full_interactive_wait
 			else
 				if [[ `git status --porcelain` ]]; then
 					# Changes
 					git status | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 					printf "`pwd`\n" >> $CURRENT_DIRECTORY/git_folders_with_changes.txt
-				
+
 					# TODO : Check for own repository
 					# git ls-remote /url/remote/repo
 					# git add . | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 					# git commit -m "$now" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 					# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-					
+
 					# Interaction with Handler
-					if [ $want_invoke_handler == "true" ]; then
+					if [ "$want_invoke_handler" == "true" ]; then
 						invoke_git_handler "`pwd`" $handler $pause $is_full_interactive_wait
 					fi
 				# else
-				
+
 					# No changes
-					
+
 				fi
-				
+
 				# git log origin/master..HEAD
 				if [[ `git log --branches --not --remotes` ]]; then
 					# Changes
 					git log --branches --not --remotes | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 					printf "`pwd`\n" >> $CURRENT_DIRECTORY/git_folders_with_unpushed_commits.txt
-				
+
 					# TODO : Check for own repository
 					# git ls-remote /url/remote/repo
 					# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-					
+
 					# Interaction with Handler
-					if [ $want_invoke_handler == "true" ]; then
+					if [ "$want_invoke_handler" == "true" ]; then
 						invoke_git_handler "`pwd`" $handler $pause $is_full_interactive_wait
 					fi
 				# else
-				
+
 					# No changes
-					
+
 				fi
 			fi
 		elif [ ! -d .svn ] && [ ! -d CVS ]; then
@@ -148,7 +148,7 @@ git pull --all $([ $include_sub_modules == "true" ] && echo "--recurse-submodule
 				# scan *
 
 			# fi
-			
+
 			# TODO : Avoid Android_Studio like place holder folders
 			printf "`pwd`\n" >> $CURRENT_DIRECTORY/non_git_folders.txt
 			non_git_handler "`pwd`"
@@ -167,17 +167,17 @@ git pull --all $([ $include_sub_modules == "true" ] && echo "--recurse-submodule
 # $4: Whether to wait for the process to finish (boolean)
 # $5: Whether to include submodules (boolean)
 function scan() {
-	
-	#echo "`pwd`"
-	#echo "About to scan $*"
 
-	local want_invoke_handler="$2"
-	local handler="$3"
-	local pause="$4"
-	local is_full_interactive_wait="$5"
-	local include_sub_modules="$6"
-	
-	for x in $1; do
+	# echo "`pwd`"
+	# echo "About to scan $*"
+
+	local want_invoke_handler="$1"
+	local handler="$2"
+	local pause="$3"
+	local is_full_interactive_wait="$4"
+	local include_sub_modules="$5"
+
+	for x in *; do
 		update $x $want_invoke_handler $handler $pause $is_full_interactive_wait $include_sub_modules
 	done
 }
@@ -197,7 +197,7 @@ function updater() {
 
 	# If handler is 'github' or 'fork', set want_invoke_handler to true
 	local want_invoke_handler=""
-	if [ $handler == "github" ] || [ $handler == "fork" ]; then
+	if [ "$handler" == "github" ] || [ "$handler" == "fork" ]; then
 		want_invoke_handler="true"
 	elif [ "$handler" == "" ]; then
 		want_invoke_handler="false"
@@ -208,8 +208,8 @@ function updater() {
 
 	if [ $dir != "" ]; then cd $dir > /dev/null; fi
 	printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-	
-	scan * $want_invoke_handler $handler $pause $is_full_interactive_wait $include_sub_modules
+
+	scan $want_invoke_handler $handler $pause $is_full_interactive_wait $include_sub_modules
 }
 
 
