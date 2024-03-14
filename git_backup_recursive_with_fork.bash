@@ -7,6 +7,28 @@ NORMAL='\e[00m'
 now=`date`
 CURRENT_DIRECTORY=`pwd`
 
+function invoke_git_handler() {
+
+	invoke_fork "$1"
+}
+
+function invoke_fork() {
+
+	Fork.exe "$1"
+	pause 'Press [Enter] key to continue...'
+}
+
+function invoke_github() {
+
+	github "$1"
+	pause 'Press [Enter] key to continue...'
+}
+
+function pause(){
+
+   read -p "$*"
+}
+
 function update() {
 
 	local d="$1"
@@ -109,28 +131,6 @@ function updater() {
 	if [ "$1" != "" ]; then cd "$1" > /dev/null; fi
 	printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 	scan *
-}
-
-function invoke_git_handler() {
-
-	invoke_fork "$1"
-}
-
-function invoke_github() {
-
-	github "$1"
-	pause 'Press [Enter] key to continue...'
-}
-
-function invoke_fork() {
-
-	Fork.exe "$1"
-	pause 'Press [Enter] key to continue...'
-}
-
-function pause(){
-
-   read -p "$*"
 }
 
 if [ "$1" == "" ]; then
