@@ -82,7 +82,7 @@ function update() {
 			printf "`pwd`\n" >> $CURRENT_DIRECTORY/git_folders.txt
 			printf "%b\n" "\n${HIGHLIGHT}Processing `pwd`$NORMAL" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 			
-			# TODO : Check for pulll permission
+			# TODO : Check for pull permission
 			git fetch --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 			git pull --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 			
