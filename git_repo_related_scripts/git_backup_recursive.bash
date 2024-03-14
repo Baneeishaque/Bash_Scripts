@@ -59,7 +59,7 @@ function pause(){
 # Function to handle non-git directories
 # $1: The directory to handle (string)
 function non_git_handler() {
-	invoke_github "$1"
+	echo invoke_client "github" $1
 }
 
 # Function to update a directory
