@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./git_backup_recursive.bash
+source git_backup_recursive.bash
 
 if [ "$1" == "" ]; then
 
