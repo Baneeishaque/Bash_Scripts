@@ -18,42 +18,23 @@ function invoke_git_handler() {
 	local pause="$3"
 	local is_full_interactive_wait="$4"
 
-	if [ "$handler" == "github" ] || [ "$handler" == "both" ]; then
-		invoke_github "$dir" "$pause" "$is_full_interactive_wait"
-	fi
-
-	if [ "$handler" == "fork" ] || [ "$handler" == "both" ]; then
-		invoke_fork "$dir" "$pause" "$is_full_interactive_wait"
+	if [ "$handler" == "github" ] || [ "$handler" == "fork" ] || [ "$handler" == "both" ]; then
+		invoke_client "$handler" "$dir" "$pause" "$is_full_interactive_wait"
 	fi
 }
 
-# Function to invoke the Fork Git client
-# $1: The directory to open in Fork (string)
-# $2: Whether to pause the script (boolean)
-# $3: Whether to wait for the process to finish (boolean)
-function invoke_fork() {
-	local dir="$1"
-	local pause="$2"
-	local is_full_interactive_wait="$3"
+# Function to invoke the Git client
+# $1: The client to invoke (string)
+# $2: The directory to open in the client (string)
+# $3: Whether to pause the script (boolean)
+# $4: Whether to wait for the process to finish (boolean)
+function invoke_client() {
+	local client="$1"
+	local dir="$2"
+	local pause="$3"
+	local is_full_interactive_wait="$4"
 
-	Fork.exe "$dir"
-	if [ "$is_full_interactive_wait" == "true" ]; then
-		wait $!
-	elif [ "$pause" == "true" ]; then
-		pause 'Press [Enter] key to continue...'
-	fi
-}
-
-# Function to invoke the Github client
-# $1: The directory to open in Github (string)
-# $2: Whether to pause the script (boolean)
-# $3: Whether to wait for the process to finish (boolean)
-function invoke_github() {
-	local dir="$1"
-	local pause="$2"
-	local is_full_interactive_wait="$3"
-
-	github "$dir"
+	$client.exe "$dir"
 	if [ "$is_full_interactive_wait" == "true" ]; then
 		wait $!
 	elif [ "$pause" == "true" ]; then
@@ -113,11 +94,15 @@ function update() {
 					
 					# Interaction with Handler
 					if [ "$want_invoke_handler" == "true" ]; then
+						invoke_git_handler "`pwd`" "$handler" "$pause" "$is_full_interactive_wait"
+					fi
 				# else
 				
 					# No changes
 					
 				fi
+				
+				# git log origin/master..HEAD
 				if [[ `git log --branches --not --remotes` ]]; then
 					# Changes
 					git log --branches --not --remotes | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
@@ -136,7 +121,7 @@ function update() {
 					# No changes
 					
 				fi
-				
+			fi
 		elif [ ! -d .svn ] && [ ! -d CVS ]; then
 			printf "%b\n" "\n${HIGHLIGHT}Non Git Folder : `pwd`$NORMAL" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 
