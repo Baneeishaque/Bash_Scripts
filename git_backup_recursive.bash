@@ -85,13 +85,8 @@ function update() {
 			printf "%b\n" "\n${HIGHLIGHT}Processing `pwd`$NORMAL" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 			
 			# TODO : Check for pulll permission
-			if [ $include_sub_modules == "true" ]; then
-				git fetch --all --recurse-submodules | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-				git pull --all --recurse-submodules | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-			else
-				git fetch --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-				git pull --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-			fi
+			git fetch --all $([ $include_sub_modules == "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+git pull --all $([ $include_sub_modules == "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 			
 			if [ $is_full_interactive_wait == "true" ]; then
 				invoke_git_handler "`pwd`" $handler $pause $is_full_interactive_wait
