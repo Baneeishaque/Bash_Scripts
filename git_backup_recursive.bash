@@ -128,7 +128,7 @@ function update() {
 # Function to scan directories
 # $1: Directories to scan (string)
 # $2: Whether to invoke the git handler (boolean)
-function scan {
+function scan() {
 	
 	#echo "`pwd`"
 	#echo "About to scan $*"
