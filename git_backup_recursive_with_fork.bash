@@ -38,7 +38,7 @@ function update() {
 				# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 				
 				# Interaction with Github
-				handler "`pwd`"
+				invoke_git_handler "`pwd`"
 
 			# else
 			
@@ -58,7 +58,7 @@ function update() {
 				# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 				
 				# Interaction with Github
-				handler "`pwd`"
+				invoke_git_handler "`pwd`"
 
 			# else
 			
@@ -111,7 +111,7 @@ function updater() {
 	scan *
 }
 
-function handler() {
+function invoke_git_handler() {
 
 	invoke_fork "$1"
 }
