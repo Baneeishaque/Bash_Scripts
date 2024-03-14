@@ -21,10 +21,10 @@ function invoke_git_handler() {
 	if [ $handler == "github" ]; then
 		invoke_client "github" $dir $pause $is_full_interactive_wait
 	elif [ $handler == "fork" ]; then
-		invoke_client "fork" $dir $pause $is_full_interactive_wait
+		invoke_client "fork.exe" $dir $pause $is_full_interactive_wait
 	elif [ $handler == "both" ]; then
 		invoke_client "github" $dir $pause $is_full_interactive_wait
-		invoke_client "fork" $dir $pause $is_full_interactive_wait
+		invoke_client "fork.exe" $dir $pause $is_full_interactive_wait
 	else
 		echo "Invalid handler. Please use 'github', 'fork', or 'both'."
 		exit 1
@@ -42,7 +42,7 @@ function invoke_client() {
 	local pause="$3"
 	local is_full_interactive_wait="$4"
 
-	$client.exe "$dir"
+	$client "$dir"
 	if [ $is_full_interactive_wait == "true" ]; then
 		wait $!
 	elif [ $pause == "true" ]; then
