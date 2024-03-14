@@ -18,8 +18,16 @@ function invoke_git_handler() {
 	local pause="$3"
 	local is_full_interactive_wait="$4"
 
-	if [ "$handler" == "github" ] || [ "$handler" == "fork" ] || [ "$handler" == "both" ]; then
-		invoke_client "$handler" "$dir" "$pause" "$is_full_interactive_wait"
+	if [ $handler == "github" ]; then
+		invoke_client "github" $dir $pause $is_full_interactive_wait
+	elif [ $handler == "fork" ]; then
+		invoke_client "fork" $dir $pause $is_full_interactive_wait
+	elif [ $handler == "both" ]; then
+		invoke_client "github" $dir $pause $is_full_interactive_wait
+		invoke_client "fork" $dir $pause $is_full_interactive_wait
+	else
+		echo "Invalid handler. Please use 'github', 'fork', or 'both'."
+		exit 1
 	fi
 }
 
@@ -35,9 +43,9 @@ function invoke_client() {
 	local is_full_interactive_wait="$4"
 
 	$client.exe "$dir"
-	if [ "$is_full_interactive_wait" == "true" ]; then
+	if [ $is_full_interactive_wait == "true" ]; then
 		wait $!
-	elif [ "$pause" == "true" ]; then
+	elif [ $pause == "true" ]; then
 		pause 'Press [Enter] key to continue...'
 	fi
 }
@@ -78,8 +86,8 @@ function update() {
 			git fetch --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 			git pull --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 			
-			if [ "$is_full_interactive_wait" == "true" ]; then
-				invoke_git_handler "`pwd`" "$handler" "$pause" "$is_full_interactive_wait"
+			if [ $is_full_interactive_wait == "true" ]; then
+				invoke_git_handler "`pwd`" $handler $pause $is_full_interactive_wait
 			else
 				if [[ `git status --porcelain` ]]; then
 					# Changes
@@ -93,8 +101,8 @@ function update() {
 					# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 					
 					# Interaction with Handler
-					if [ "$want_invoke_handler" == "true" ]; then
-						invoke_git_handler "`pwd`" "$handler" "$pause" "$is_full_interactive_wait"
+					if [ $want_invoke_handler == "true" ]; then
+						invoke_git_handler "`pwd`" $handler $pause $is_full_interactive_wait
 					fi
 				# else
 				
@@ -113,8 +121,8 @@ function update() {
 					# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 					
 					# Interaction with Handler
-					if [ "$want_invoke_handler" == "true" ]; then
-						invoke_git_handler "`pwd`" "$handler" "$pause" "$is_full_interactive_wait"
+					if [ $want_invoke_handler == "true" ]; then
+						invoke_git_handler "`pwd`" $handler $pause $is_full_interactive_wait
 					fi
 				# else
 				
@@ -161,12 +169,12 @@ function scan() {
 	#echo "About to scan $*"
 
 	local want_invoke_handler="$2"
-	local handler="$2"
-	local pause="$3"
-	local is_full_interactive_wait="$4"
+	local handler="$3"
+	local pause="$4"
+	local is_full_interactive_wait="$5"
 	
 	for x in $1; do
-		update "$x" "$want_invoke_handler" "$handler" "$pause" "$is_full_interactive_wait"
+		update $x $want_invoke_handler $handler $pause $is_full_interactive_wait
 	done
 }
 
@@ -181,20 +189,28 @@ function updater() {
 	local pause="$3"
 	local is_full_interactive_wait="$4"
 
-	if [ "$dir" != "" ]; then cd "$dir" > /dev/null; fi
+	# If handler is 'github' or 'fork', set want_invoke_handler to true
+	local want_invoke_handler=""
+	if [ $handler == "github" ] || [ $handler == "fork" ]; then
+		$want_invoke_handler="true"
+	elif [ "$handler" == "" ]; then
+		$want_invoke_handler="false"
+	else
+		echo "Warning: Handler should be either 'github', 'fork' or empty."
+		exit 1
+	fi
+
+	if [ $dir != "" ]; then cd $dir > /dev/null; fi
 	printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 	
-	if [ "$pause" == "true" ]; then
-		scan * "$handler" "true" "$is_full_interactive_wait"
-	else
-		scan * "$handler" "" "$is_full_interactive_wait"
-	fi
+	scan * $want_invoke_handler $handler $pause $is_full_interactive_wait
 }
 
+
 if [ "$1" == "" ]; then
-	updater
+	updater "" "" "false" "false"
 else
 	for dir in "$@"; do
-		updater "$dir"
+		updater $dir "" "false" "false"
 	done
 fi
