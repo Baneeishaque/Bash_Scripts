@@ -7,9 +7,35 @@ NORMAL='\e[00m'
 now=`date`
 CURRENT_DIRECTORY=`pwd`
 
-function update {
+# Function to invoke the git handler
+# $1: The directory to handle (string)
+function invoke_git_handler() {
+
+	invoke_fork "$1"
+}
+
+# Function to invoke the Fork Git client
+# $1: The directory to open in Fork (string)
+function invoke_fork() {
+
+	Fork.exe "$1"
+	# pause 'Press [Enter] key to continue...'
+}
+
+# Function to pause the script
+# $*: The prompt to display when pausing
+function pause(){
+
+   read -p "$*"
+}
+
+# Function to update a directory
+# $1: The directory to update (string)
+# $2: Whether to invoke the git handler (boolean)
+function update() {
 
 	local d="$1"
+	local want_invoke_handler="$2"
 
 	if [ -d "$d" ]; then
 		
@@ -36,6 +62,11 @@ function update {
 				# git add . | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 				# git commit -m "$now" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 				# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+				
+				# Interaction with Handler
+				if [ "$want_invoke_handler" == "true" ]; then
+					invoke_git_handler "`pwd`"
+				fi
 
 			# else
 			
@@ -53,6 +84,11 @@ function update {
 				# TODO : Check for own repository
 				# git ls-remote /url/remote/repo
 				# git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+				
+				# Interaction with Handler
+				if [ "$want_invoke_handler" == "true" ]; then
+					invoke_git_handler "`pwd`"
+				fi
 
 			# else
 			
@@ -89,20 +125,37 @@ function update {
 	#echo "Exiting update: pwd=`pwd`"
 }
 
+# Function to scan directories
+# $1: Directories to scan (string)
+# $2: Whether to invoke the git handler (boolean)
 function scan {
 	
 	#echo "`pwd`"
 	#echo "About to scan $*"
-	for x in $*; do
-		update "$x"
+
+	local want_invoke_handler="$2"
+	
+	for x in $1; do
+		update "$x" "$want_invoke_handler"
 	done
 }
 
-function updater {
+# Function to update directories
+# $1: The directory to update (string)
+# $2: Whether to invoke the git handler (boolean)
+function updater() {
 	
-	if [ "$1" != "" ]; then cd "$1" > /dev/null; fi
+	local dir="$1"
+	local want_invoke_handler="$2"
+
+	if [ "$dir" != "" ]; then cd "$dir" > /dev/null; fi
 	printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-	scan *
+	
+	if [ "$want_invoke_handler" == "true" ]; then
+		scan * true
+	else
+		scan *
+	fi
 }
 
 if [ "$1" == "" ]; then
