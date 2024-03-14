@@ -68,12 +68,14 @@ function non_git_handler() {
 # $3: The handler to invoke (string)
 # $4: Whether to pause the script (boolean)
 # $5: Whether to wait for the process to finish (boolean)
+# $6: Whether to include submodules (boolean)
 function update() {
 	local d="$1"
 	local want_invoke_handler="$2"
 	local handler="$3"
 	local pause="$4"
 	local is_full_interactive_wait="$5"
+	local include_sub_modules="$6"
 
 	if [ -d "$d" ]; then
 		cd "$d" > /dev/null
@@ -82,9 +84,14 @@ function update() {
 			printf "`pwd`\n" >> $CURRENT_DIRECTORY/git_folders.txt
 			printf "%b\n" "\n${HIGHLIGHT}Processing `pwd`$NORMAL" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 			
-			# TODO : Check for pull permission
-			git fetch --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-			git pull --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+			# TODO : Check for pulll permission
+			if [ $include_sub_modules == "true" ]; then
+				git fetch --all --recurse-submodules | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+				git pull --all --recurse-submodules | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+			else
+				git fetch --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+				git pull --all | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+			fi
 			
 			if [ $is_full_interactive_wait == "true" ]; then
 				invoke_git_handler "`pwd`" $handler $pause $is_full_interactive_wait
@@ -150,7 +157,7 @@ function update() {
 			# TODO : Avoid Android_Studio like place holder folders
 			printf "`pwd`\n" >> $CURRENT_DIRECTORY/non_git_folders.txt
 			non_git_handler "`pwd`"
-			scan *
+			scan * $want_invoke_handler $handler $pause $is_full_interactive_wait $include_sub_modules
 		fi
 
 		cd .. > /dev/null
@@ -163,6 +170,7 @@ function update() {
 # $2: The handler to invoke (string)
 # $3: Whether to pause the script (boolean)
 # $4: Whether to wait for the process to finish (boolean)
+# $5: Whether to include submodules (boolean)
 function scan() {
 	
 	#echo "`pwd`"
@@ -172,9 +180,10 @@ function scan() {
 	local handler="$3"
 	local pause="$4"
 	local is_full_interactive_wait="$5"
+	local include_sub_modules="$6"
 	
 	for x in $1; do
-		update $x $want_invoke_handler $handler $pause $is_full_interactive_wait
+		update $x $want_invoke_handler $handler $pause $is_full_interactive_wait $include_sub_modules
 	done
 }
 
@@ -183,18 +192,20 @@ function scan() {
 # $2: The handler to invoke (string)
 # $3: Whether to pause the script (boolean)
 # $4: Whether to wait for the process to finish (boolean)
+# $5: Whether to include submodules (boolean)
 function updater() {
 	local dir="$1"
 	local handler="$2"
 	local pause="$3"
 	local is_full_interactive_wait="$4"
+	local include_sub_modules="$5"
 
 	# If handler is 'github' or 'fork', set want_invoke_handler to true
 	local want_invoke_handler=""
 	if [ $handler == "github" ] || [ $handler == "fork" ]; then
-		$want_invoke_handler="true"
+		want_invoke_handler="true"
 	elif [ "$handler" == "" ]; then
-		$want_invoke_handler="false"
+		want_invoke_handler="false"
 	else
 		echo "Warning: Handler should be either 'github', 'fork' or empty."
 		exit 1
@@ -203,14 +214,14 @@ function updater() {
 	if [ $dir != "" ]; then cd $dir > /dev/null; fi
 	printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 	
-	scan * $want_invoke_handler $handler $pause $is_full_interactive_wait
+	scan * $want_invoke_handler $handler $pause $is_full_interactive_wait $include_sub_modules
 }
 
 
 if [ "$1" == "" ]; then
-	updater "" "" "false" "false"
+	updater "" "" "false" "false" "false"
 else
 	for dir in "$@"; do
-		updater $dir "" "false" "false"
+		updater $dir "" "false" "false" "false"
 	done
 fi
