@@ -4,12 +4,12 @@ source git_backup_recursive.bash
 
 if [ "$1" == "" ]; then
 
-	updater "" "fork" "false" "false"
+	updater "" "fork" "false" "false" "false"
 
 else
 
 	for dir in "$@"; do
 	
-		updater "$dir" "fork" "false" "false"
+		updater "$dir" "fork" "false" "false" "false"
 	done
 fi

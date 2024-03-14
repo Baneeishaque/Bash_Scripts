@@ -5,9 +5,9 @@ source git_backup_recursive.bash
 
 # Call the updater function with the desired parameters
 if [ "$1" == "" ]; then
-	updater "" "fork" "false" "true"
+	updater "" "fork" "false" "true" "false"
 else
 	for dir in "$@"; do
-		updater "$dir" "fork" "fasle" "true"
+		updater "$dir" "fork" "fasle" "true" "false"
 	done
 fi
