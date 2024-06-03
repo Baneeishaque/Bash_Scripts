@@ -86,7 +86,7 @@ function update() {
 
 			# TODO : Check for pulll permission
 			git fetch --all $([ "$include_sub_modules" == "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-git pull --all $([ "$include_sub_modules" == "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+			git pull --all $([ "$include_sub_modules" == "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 
 			if [ "$is_full_interactive_wait" == "true" ]; then
 				invoke_git_handler "`pwd`" $handler $pause $is_full_interactive_wait
