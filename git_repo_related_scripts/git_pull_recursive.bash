@@ -1,48 +1,20 @@
 #!/bin/bash
 
-# Skips directories that contain a file called .ignore
+# Get the directory of the current script
+DIR="$(dirname "$0")"
 
-HIGHLIGHT="\e[01;34m"
-NORMAL='\e[00m'
+# Source the base script
+source "$DIR/git_base_recursive.bash"
 
-function update {
-  local d="$1"
-  if [ -d "$d" ]; then
-    #echo "Looking for $d/.ignore"
-    if [ -e "$d/.ignore" ]; then
-      printf "%b\n" "\n${HIGHLIGHT}Ignoring $d${NORMAL}"
-    else
-      cd "$d" > /dev/null
-      if [ -d ".git" ]; then
-        printf "%b\n" "\n${HIGHLIGHT}Updating `pwd`$NORMAL"
-        git pull
-      elif [ ! -d .svn ] && [ ! -d CVS ]; then
-        scan *
-      fi
-      cd .. > /dev/null
-    fi
-  fi
-  #echo "Exiting update: pwd=`pwd`"
+# Override git_operation to implement pull
+function git_operation {
+    local repo_path="$1"
+    git pull
 }
 
-function scan {
-  #echo "`pwd`"
-  #echo "About to scan $*"
-  for x in $*; do
-    update "$x"
-  done
+# Dummy function for post-pull operations (can be overridden by sync)
+function post_git_operation {
+    local repo_path="$1"
+    # Override this in sync script to add push
+    return 0
 }
-
-function updater {
-  if [ "$1" != "" ]; then cd "$1" > /dev/null; fi
-  printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}"
-  scan *
-}
-
-if [ "$1" == "" ]; then
-  updater
-else
-  for dir in "$@"; do
-    updater "$dir"
-  done
-fi
