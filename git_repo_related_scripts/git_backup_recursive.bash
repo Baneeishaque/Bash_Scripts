@@ -18,11 +18,11 @@ function invoke_git_handler() {
     local pause="$3"
     local is_full_interactive_wait="$4"
 
-    if [ "$handler" == "github" ]; then
+    if [ "$handler" = "github" ]; then
         invoke_client "github" $dir $pause $is_full_interactive_wait
-    elif [ "$handler" == "fork" ]; then
+    elif [ "$handler" = "fork" ]; then
         invoke_client "fork.exe" $dir $pause $is_full_interactive_wait
-    elif [ "$handler" == "both" ]; then
+    elif [ "$handler" = "both" ]; then
         invoke_client "github" $dir $pause $is_full_interactive_wait
         invoke_client "fork.exe" $dir $pause $is_full_interactive_wait
     else
@@ -43,9 +43,9 @@ function invoke_client() {
     local is_full_interactive_wait="$4"
 
     $client "$dir"
-    if [ "$is_full_interactive_wait" == "true" ]; then
+    if [ "$is_full_interactive_wait" = "true" ]; then
         wait $!
-    elif [ "$pause" == "true" ]; then
+    elif [ "$pause" = "true" ]; then
         pause 'Press [Enter] key to continue...'
     fi
 }
@@ -85,10 +85,10 @@ function update() {
             printf "%b\n" "\n${HIGHLIGHT}Processing $(pwd)$NORMAL" | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 
             # TODO : Check for pulll permission
-            git fetch --all $([ "$include_sub_modules" == "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
-            git pull --all $([ "$include_sub_modules" == "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+            git fetch --all $([ "$include_sub_modules" = "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
+            git pull --all $([ "$include_sub_modules" = "true" ] && echo "--recurse-submodules") | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 
-            if [ "$is_full_interactive_wait" == "true" ]; then
+            if [ "$is_full_interactive_wait" = "true" ]; then
                 invoke_git_handler "$(pwd)" $handler $pause $is_full_interactive_wait
             else
                 if [[ $(git status --porcelain) ]]; then
@@ -103,7 +103,7 @@ function update() {
                     # git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 
                     # Interaction with Handler
-                    if [ "$want_invoke_handler" == "true" ]; then
+                    if [ "$want_invoke_handler" = "true" ]; then
                         invoke_git_handler "$(pwd)" $handler $pause $is_full_interactive_wait
                     fi
                     # else
@@ -123,7 +123,7 @@ function update() {
                     # git push | tee -a $CURRENT_DIRECTORY/git_backup_recursive.log
 
                     # Interaction with Handler
-                    if [ "$want_invoke_handler" == "true" ]; then
+                    if [ "$want_invoke_handler" = "true" ]; then
                         invoke_git_handler "$(pwd)" $handler $pause $is_full_interactive_wait
                     fi
                     # else
@@ -197,9 +197,9 @@ function updater() {
 
     # If handler is 'github' or 'fork', set want_invoke_handler to true
     local want_invoke_handler=""
-    if [ "$handler" == "github" ] || [ "$handler" == "fork" ]; then
+    if [ "$handler" = "github" ] || [ "$handler" = "fork" ]; then
         want_invoke_handler="true"
-    elif [ "$handler" == "" ]; then
+    elif [ "$handler" = "" ]; then
         want_invoke_handler="false"
     else
         echo "Warning: Handler should be either 'github', 'fork' or empty."
@@ -212,7 +212,7 @@ function updater() {
     scan $want_invoke_handler $handler $pause $is_full_interactive_wait $include_sub_modules
 }
 
-if [ "$1" == "" ]; then
+if [ "$1" = "" ]; then
     updater "" "" "false" "false" "false"
 else
     for dir in "$@"; do
