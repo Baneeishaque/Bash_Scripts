@@ -284,15 +284,81 @@ if [ "$DRY_RUN" = true ]; then
     return 0
 fi
 
+ensure_trash_utility() {
+    if command -v trash &>/dev/null; then
+        return 0
+    fi
+
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS: try to install trash via brew if not present
+        if ! command -v trash &>/dev/null; then
+            echo "Installing 'trash' via Homebrew..."
+            if command -v brew &>/dev/null; then
+                brew install trash
+            else
+                echo "Homebrew not found. Please install Homebrew or use 'brew install trash' manually."
+                return 1
+            fi
+        fi
+        return 0
+    elif [[ "$OSTYPE" == "linux"* ]]; then
+        # Linux: check for gio or kioclient5, otherwise suggest install
+        if command -v gio &>/dev/null; then
+            return 0
+        elif command -v kioclient5 &>/dev/null; then
+            return 0
+        else
+            echo "No trash utility found. Please install 'gio' (Gnome), 'kioclient5' (KDE), or 'trash-cli' (pip install trash-cli)."
+            return 1
+        fi
+    elif [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* || "$OSTYPE" == "win32"* ]]; then
+        # Windows: try to install recycle-bin via winget
+        if ! command -v recycle-bin &>/dev/null; then
+            echo "Installing 'recycle-bin' via winget..."
+            if command -v winget &>/dev/null; then
+                winget install --id=Recycle.Bin -e
+            else
+                echo "winget not found. Please install 'recycle-bin' manually."
+                return 1
+            fi
+        fi
+        return 0
+    fi
+
+    echo "No supported trash utility found for your OS."
+    return 1
+}
+
+move_to_trash() {
+    local target="$1"
+    if command -v trash &>/dev/null; then
+        trash "$target"
+    elif command -v gio &>/dev/null; then
+        gio trash "$target"
+    elif command -v kioclient5 &>/dev/null; then
+        kioclient5 move "$target" trash:/
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        osascript -e 'tell app "Finder" to delete POSIX file "'"$target"'"'
+    elif command -v recycle-bin &>/dev/null; then
+        recycle-bin "$target"
+    else
+        echo "No trash utility found. Aborting for safety."
+        return 1
+    fi
+}
+
+# Ensure trash utility is available
+ensure_trash_utility || { echo "No trash utility available. Aborting."; return 1; }
+
 # Change to parent directory
 verbose "Changing to parent directory: $(dirname "$REPO_PATH")"
 cd "$(dirname "$REPO_PATH")"
 check_error "Failed to change directory" || EXIT_CODE=1
 
-# Remove the repository
-verbose "Removing repository directory: $(basename "$REPO_PATH")"
-rm -rf "$(basename "$REPO_PATH")"
-check_error "Failed to remove repository" || EXIT_CODE=1
+# Move to trash instead of rm -rf
+verbose "Moving repository directory to Trash: $(basename "$REPO_PATH")"
+move_to_trash "$(basename "$REPO_PATH")"
+check_error "Failed to move repository to Trash" || EXIT_CODE=1
 
 # Clone without LFS objects and initialize submodules
 verbose "Cloning repository without LFS objects"
