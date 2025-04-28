@@ -28,7 +28,7 @@ for remote in $remotes; do
     remote_info=$(rclone config show "$remote_name" --config "$CONFIG_PATH")
     # echo $remote_info
     # press_enter_to_continue
-    remote_type=$(echo "$remote_info" | grep "type =" | cut -d '=' -f 2 | tr -d ' ')
+    remote_type=$(echo "$remote_info" | grep "type =" | head -n1 | cut -d '=' -f 2 | tr -d ' ')
     # echo $remote_type
     # press_enter_to_continue
     
