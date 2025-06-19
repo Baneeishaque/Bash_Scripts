@@ -51,7 +51,7 @@ function update {
 
 function scan {
     printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}"
-    for x in $*; do
+    for x in *; do
         update "$x"
     done
 }
