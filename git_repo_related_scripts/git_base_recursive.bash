@@ -30,10 +30,12 @@ function update {
     printf "%b\n" "${HIGHLIGHT}Updating $1${NORMAL}"
     local d="$1"
     if [ -d "$d" ]; then
+        printf "DEBUG: Entered directory check for $d\n"
         if [ -e "$d/.ignore" ]; then
             printf "%b\n" "\n${HIGHLIGHT}Ignoring $d${NORMAL}"
         else
             cd "$d" >/dev/null
+            printf "DEBUG: Now in $(pwd)\n"
             if [ -d ".git" ]; then
                 printf "%b\n" "\n${HIGHLIGHT}Processing $(pwd)${NORMAL}"
                 pre_git_operation "$(pwd)"
