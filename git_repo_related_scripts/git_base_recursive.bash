@@ -61,11 +61,3 @@ function updater {
     printf "%b\n" "${HIGHLIGHT}Starting update in $(pwd)${NORMAL}"
     scan *
 }
-
-if [ "$1" == "" ]; then
-    updater
-else
-    for dir in "$@"; do
-        updater "$dir"
-    done
-fi

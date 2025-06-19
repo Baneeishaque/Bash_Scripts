@@ -19,3 +19,11 @@ function post_git_operation {
     # Override this in sync script to add push
     return 0
 }
+
+if [ "$1" == "" ]; then
+    updater
+else
+    for dir in "$@"; do
+        updater "$dir"
+    done
+fi
