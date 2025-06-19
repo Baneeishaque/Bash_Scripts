@@ -27,6 +27,7 @@ function post_git_operation {
 }
 
 function update {
+    printf "%b\n" "${HIGHLIGHT}Updating $1${NORMAL}"
     local d="$1"
     if [ -d "$d" ]; then
         if [ -e "$d/.ignore" ]; then
@@ -47,6 +48,7 @@ function update {
 }
 
 function scan {
+    printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}"
     for x in $*; do
         update "$x"
     done
@@ -54,7 +56,7 @@ function scan {
 
 function updater {
     if [ "$1" != "" ]; then cd "$1" >/dev/null; fi
-    printf "%b\n" "${HIGHLIGHT}Scanning ${PWD}${NORMAL}"
+    printf "%b\n" "${HIGHLIGHT}Starting update in $(pwd)${NORMAL}"
     scan *
 }
 
