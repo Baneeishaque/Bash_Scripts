@@ -8,6 +8,7 @@ source "$DIR/git_base_recursive.bash"
 
 # Override git_operation to implement pull
 function git_operation {
+    printf "%b\n" "${HIGHLIGHT}Pulling changes in $(pwd)${NORMAL}"
     local repo_path="$1"
     git pull
 }
