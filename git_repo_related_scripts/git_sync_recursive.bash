@@ -14,3 +14,7 @@ function post_git_operation {
     git push
   fi
 }
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    run_updater_entrypoint "$@"
+fi

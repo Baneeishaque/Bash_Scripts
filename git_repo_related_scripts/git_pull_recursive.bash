@@ -20,10 +20,12 @@ function post_git_operation {
     return 0
 }
 
-if [ "$1" == "" ]; then
-    updater
-else
-    for dir in "$@"; do
-        updater "$dir"
-    done
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    if [ "$1" == "" ]; then
+        updater
+    else
+        for dir in "$@"; do
+            updater "$dir"
+        done
+    fi
 fi
