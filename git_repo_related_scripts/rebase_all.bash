@@ -1,31 +1,27 @@
 #!/bin/bash
+source "$(dirname "$0")/git_common.sh"
 
 BASE_BRANCH=$1
+DRY_RUN=$([[ "$2" == "--dry-run" ]] && echo true || echo false)
 
-if [ -z "$BASE_BRANCH" ]; then
-  echo "❌ Error: No base branch specified."
-  echo "Usage: ./rebase_all.sh <base-branch>"
-  exit 1
-fi
+[ -z "$BASE_BRANCH" ] && echo "Usage: ./rebase_all.bash <base-branch> [--dry-run]" && exit 1
 
-echo "🔍 Fetching all branches..."
-git fetch --all
+fetch_all
+verify_branch_exists "$BASE_BRANCH" || { echo "❌ Base branch '$BASE_BRANCH' not found."; exit 1; }
 
-echo "📂 Checking out base branch: $BASE_BRANCH"
-git checkout $BASE_BRANCH || { echo "Base branch '$BASE_BRANCH' not found."; exit 1; }
-
-echo "📋 Listing local branches..."
-branches=$(git branch | sed 's/\*//g' | sed 's/ //g' | grep -v "$BASE_BRANCH")
+branches=$(list_local_branches | grep -v "$BASE_BRANCH")
 
 for branch in $branches; do
-  echo "🔄 Rebasing branch: $branch onto $BASE_BRANCH"
-  git checkout $branch
-  git rebase $BASE_BRANCH
-  if [ $? -ne 0 ]; then
-    echo "⚠️ Rebase failed on branch $branch. Resolve conflicts manually."
-    exit 1
+  echo -e "\n🔍 Evaluating branch: $branch"
+  show_branch_diff "$branch" "$BASE_BRANCH"
+
+  if $DRY_RUN; then
+    dry_run_notice "git rebase $BASE_BRANCH onto $branch"
+    continue
   fi
-  echo "✅ Successfully rebased $branch"
+
+  git checkout $branch && git rebase $BASE_BRANCH
+  [ $? -ne 0 ] && echo "⚠️ Rebase failed on $branch" && exit 1
 done
 
-echo "🏁 All branches rebased onto $BASE_BRANCH!"
+echo "✅ Rebase operation complete."
