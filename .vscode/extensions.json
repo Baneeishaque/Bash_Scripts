@@ -1,6 +1,17 @@
 {
-    "recommendations": [
-        "github.copilot",
-        "github.copilot-chat"
-    ]
+  "recommendations": [
+    "github.copilot",
+    "github.copilot-chat",
+    "vscode.json",
+    "PKief.material-icon-theme",
+    "vscode.shellscript",
+    "foxundermoon.shell-format",
+    "vscode.git-base",
+    "vscode.git",
+    "mhutchie.git-graph",
+    "donjayamanne.githistory",
+    "hashhar.gitattributes",
+    "GitHub.copilot-nightly",
+    "eamodio.gitlens"
+  ]
 }
