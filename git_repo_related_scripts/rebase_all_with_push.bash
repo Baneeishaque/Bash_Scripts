@@ -1,5 +1,5 @@
 #!/bin/bash
-source "$(dirname "$0")/git_common.sh"
+source "$(dirname "$0")/git_common.bash"
 
 BASE_BRANCH=$1
 DRY_RUN=$([[ "$2" == "--dry-run" ]] && echo true || echo false)
