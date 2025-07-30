@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source ./addToBashConfigurationHelper.bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/addToBashConfigurationHelper.bash"
 
 installBrewFormula() {
     if [ -z "$1" ]; then
@@ -16,7 +17,7 @@ installBrewFormula() {
     fi
 
     echo "Updating Homebrew..."
-    if ! ./updateHomebrew.bash; then
+    if ! "$SCRIPT_DIR/updateHomebrew.bash"; then
         echo "Error: Homebrew update failed."
         return 1
     fi
@@ -28,7 +29,7 @@ installBrewFormula() {
     fi
 
     echo "Cleaning up Homebrew..."
-    if ! ./cleanupHomebrew.bash; then
+    if ! "$SCRIPT_DIR/cleanupHomebrew.bash"; then
         echo "Error: Homebrew cleanup failed."
         return 1
     fi
