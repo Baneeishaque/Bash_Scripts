@@ -1,4 +1,4 @@
-source ./installAndroidSdkComponents.bash
+source ../installAndroidSdkComponents.bash
 source ../brewFormulaInstallHelper.bash
 
 if [ ! -d /workspace/Android/Sdk ]; then
