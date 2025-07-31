@@ -1,10 +1,11 @@
 #!/bin/bash
 
-source ../brewFormulaInstallHelper.bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../brewFormulaInstallHelper.bash"
 
 phpMyAdminInstallFolder=/opt/phpMyAdmin-english
 if [ ! -d $phpMyAdminInstallFolder ]; then
-    installBrewFormula pup
+    . "$SCRIPT_DIR/../installPup.bash"
     phpMyAdminDownloadUrl=$(wget -O - https://www.phpmyadmin.net/downloads | pup 'a.download_popup attr{href}' | grep --max-count=1 'english.zip')
     wget $phpMyAdminDownloadUrl
     phpMyAdminArchieveFile=$(basename $phpMyAdminDownloadUrl)

@@ -1,8 +1,9 @@
-source ../installAndroidSdkComponents.bash
-source ../brewFormulaInstallHelper.bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../brewFormulaInstallHelper.bash"
+source "$SCRIPT_DIR/../installAndroidSdkComponents.bash"
 
 if [ ! -d /workspace/Android/Sdk ]; then
-    installBrewFormula pup
+    . "$SCRIPT_DIR/../installPup.bash"
     cd /workspace
     androidCommandLineToolsLinuxDownloadUrl="https://dl.google.com/android/repository/$(wget -O - "https://developer.android.com/studio#command-tools" | pup '[data-modal-dialog-id="sdk_linux_download"] text{}')"
     wget $androidCommandLineToolsLinuxDownloadUrl

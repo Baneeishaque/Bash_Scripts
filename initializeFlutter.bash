@@ -1,12 +1,15 @@
 #!/bin/bash
 
-source ./ensure_homebrew.bash
-source ./updateZProfile.bash
-source ./setupSdkManager.bash
-
 user_version=${1:-master}
 
-./installFVM.bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "$SCRIPT_DIR/ensure_homebrew.bash"
+source "$SCRIPT_DIR/updateZProfile.bash"
+source "$SCRIPT_DIR/setupSdkManager.bash"
+
+. "$SCRIPT_DIR/installFVM.bash"
+
 fvm install master
 fvm spawn "$user_version" create my_app
 

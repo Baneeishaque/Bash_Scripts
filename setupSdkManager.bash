@@ -1,9 +1,12 @@
 #!/bin/bash
 
-source updateZProfile.bash
-source installAndroidSdkComponents.bash
 
 setup_sdkmanager() {
+
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    source "$SCRIPT_DIR/updateZProfile.bash"
+    source "$SCRIPT_DIR/installAndroidSdkComponents.bash"
+
     # Function to set ANDROID_HOME and make it permanent
     set_android_home() {
         sdkmanager_path=$(readlink -f $(command -v sdkmanager))

@@ -1,9 +1,11 @@
 #!/bin/bash
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/addToBashConfigurationHelper.bash"
 
 installBrewFormula() {
+
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    source "$SCRIPT_DIR/addToBashConfigurationHelper.bash"
+
     if [ -z "$1" ]; then
         echo "Error: No formula name provided."
         return 1
