@@ -1,5 +1,6 @@
 #!/bin/bash
 
-source ./brewFormulaInstallHelper.bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/brewFormulaInstallHelper.bash"
 
 installBrewFormula aria2
