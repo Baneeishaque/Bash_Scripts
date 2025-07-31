@@ -11,6 +11,8 @@
     "mhutchie.git-graph",
     "donjayamanne.githistory",
     "hashhar.gitattributes",
-    "eamodio.gitlens"
+    "eamodio.gitlens",
+    "beaglefoot.awk-ide-vscode",
+    "jq-syntax-highlighting.jq-syntax-highlighting"
   ]
 }
