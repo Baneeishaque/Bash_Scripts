@@ -19,5 +19,7 @@
     "vscode.search-result",
     "vscode.merge-conflict",
     "vscode.configuration-editing",
+    "vscode.markdown",
+    "vscode.markdown-language-features",
   ]
 }
