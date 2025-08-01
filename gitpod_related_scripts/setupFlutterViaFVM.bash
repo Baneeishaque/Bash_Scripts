@@ -122,4 +122,5 @@ mise exec java@"$run_jdk" -- java --version
 
 . $DIR/installAndroidSdk.bash
 
-. $DIR/../initializeFlutter.bash "$user_version"
+source $DIR/initializeFlutter.bash
+initialize_flutter "$user_version"
