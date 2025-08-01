@@ -9,8 +9,10 @@
 
 aptInstall() {
 
-    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    source "$SCRIPT_DIR/addToBashConfigurationHelper.bash"
+  local SCRIPT_DIR
+
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  source "$SCRIPT_DIR/addToBashConfigurationHelper.bash"
 
   if [ -z "$1" ]; then
     echo "Error: No package name(s) provided."
@@ -18,7 +20,7 @@ aptInstall() {
   fi
 
   echo "Updating package index..."
-  ./updatePackageIndex.bash
+  . "$SCRIPT_DIR/updatePackageIndex.bash"
 
   echo "Installing package(s): $1"
   sudo apt install -y $1
