@@ -17,5 +17,6 @@
     "Google.geminicodeassist",
     "vscode.terminal-suggest",
     "vscode.search-result",
+    "vscode.merge-conflict",
   ]
 }
