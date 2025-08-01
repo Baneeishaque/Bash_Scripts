@@ -21,5 +21,7 @@
     "vscode.configuration-editing",
     "vscode.markdown",
     "vscode.markdown-language-features",
+    "vscode.html",
+    "vscode.html-language-features",
   ]
 }
