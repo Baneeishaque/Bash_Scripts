@@ -16,5 +16,6 @@
     "jq-syntax-highlighting.jq-syntax-highlighting",
     "Google.geminicodeassist",
     "vscode.terminal-suggest",
+    "vscode.search-result",
   ]
 }
