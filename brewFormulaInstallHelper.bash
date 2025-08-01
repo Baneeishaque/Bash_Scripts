@@ -3,8 +3,12 @@
 
 installBrewFormula() {
 
+    local SCRIPT_DIR
+
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     source "$SCRIPT_DIR/addToBashConfigurationHelper.bash"
+    source "$SCRIPT_DIR/cleanupHomebrew.bash"
+
 
     if [ -z "$1" ]; then
         echo "Error: No formula name provided."
@@ -31,7 +35,7 @@ installBrewFormula() {
     fi
 
     echo "Cleaning up Homebrew..."
-    if ! "$SCRIPT_DIR/cleanupHomebrew.bash"; then
+    if ! cleanup_homebrew; then
         echo "Error: Homebrew cleanup failed."
         return 1
     fi
