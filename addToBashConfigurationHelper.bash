@@ -1,6 +1,7 @@
 #!/bin/bash
 
 addToBashConfiguration() {
+    
     if [ -z "$1" ]; then
         echo "Error: No configuration to add provided."
         return 1
