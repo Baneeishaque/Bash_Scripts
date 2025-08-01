@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 installBrewFormula() {
 
     local SCRIPT_DIR
@@ -45,6 +44,7 @@ installBrewFormula() {
 }
 
 installBrewFormulaAfterSystemAppRemoval() {
+
     if [ -z "$1" ]; then
         echo "Error: No formula name provided."
         return 1
@@ -71,6 +71,7 @@ installBrewFormulaAfterSystemAppRemoval() {
 }
 
 installBrewFormulaWithBashConfigurations() {
+
     if [ -z "$1" ]; then
         echo "Error: No formula name provided."
         return 1
