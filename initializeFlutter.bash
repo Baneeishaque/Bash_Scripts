@@ -4,7 +4,7 @@ user_version=${1:-master}
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-source "$SCRIPT_DIR/ensure_homebrew.bash"
+source "$SCRIPT_DIR/installHomeBrew.bash"
 source "$SCRIPT_DIR/updateZProfile.bash"
 source "$SCRIPT_DIR/setupSdkManager.bash"
 
@@ -45,7 +45,7 @@ if [[ "$os" == "darwin" ]]; then
         fi
     fi
 
-    ensure_homebrew
+    install_homebrew
 
     # Install Xcode from Apple's official source if it's not installed
     if ! xcode-select -p &>/dev/null; then

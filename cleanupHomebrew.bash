@@ -1,8 +1,8 @@
 #!/bin/bash
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/ensure_homebrew.bash"
-ensure_homebrew
+source "$SCRIPT_DIR/installHomeBrew.bash"
+install_homebrew
 
 echo "Running brew autoremove..."
 if ! brew autoremove; then
