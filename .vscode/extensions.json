@@ -14,6 +14,7 @@
     "eamodio.gitlens",
     "beaglefoot.awk-ide-vscode",
     "jq-syntax-highlighting.jq-syntax-highlighting",
-    "Google.geminicodeassist"
+    "Google.geminicodeassist",
+    "vscode.terminal-suggest",
   ]
 }
