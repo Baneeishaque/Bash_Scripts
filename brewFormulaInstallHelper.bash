@@ -8,7 +8,6 @@ installBrewFormula() {
     source "$SCRIPT_DIR/addToBashConfigurationHelper.bash"
     source "$SCRIPT_DIR/cleanupHomebrew.bash"
 
-
     if [ -z "$1" ]; then
         echo "Error: No formula name provided."
         return 1
