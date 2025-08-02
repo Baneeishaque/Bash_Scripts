@@ -14,7 +14,7 @@ install_homebrew() {
         bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         local BREW_EVAL_CMD="$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
         addToBashConfiguration "eval $BREW_EVAL_CMD"
-        eval "$BREW_EVAL_CMD"
+        source ~/.bashrc
         aptInstall build-essential
         installBrewFormula gcc
     else
