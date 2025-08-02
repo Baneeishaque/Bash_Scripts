@@ -29,6 +29,7 @@
     "vscode.merge-conflict",
     "vscode.search-result",
     "vscode.shellscript",
-    "vscode.terminal-suggest"
+    "vscode.terminal-suggest",
+    "timonwong.shellcheck"
   ]
 }
