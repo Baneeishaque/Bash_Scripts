@@ -1,9 +1,11 @@
 #!/bin/bash
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 VERSION_ID=$(sudo grep -oP 'VERSION_ID="\K[^"]+' /etc/os-release)
-wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb
-./updatePackageIndex.bash
+wget -q "https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb"
+. "$SCRIPT_DIR/updatePackageIndex.bash"
 sudo apt install -y ./packages-microsoft-prod.deb
-./updatePackageIndex.bash
+. "$SCRIPT_DIR/updatePackageIndex.bash"
 sudo apt install -y powershell
 rm packages-microsoft-prod.deb
