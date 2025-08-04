@@ -14,7 +14,10 @@ append_to_bashrc() {
 }
 
 initialize_workspace() {
-    script_dir="$(dirname "$(realpath "$0")")" &&
+
+    local SCRIPT_DIR
+
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" &&
     eval "$(gp env -e)" &&
     if [ -v BASH_HUB_ACCESS_TOKEN ] && [ -v BASH_HUB_SYSTEM_NAME ]; then
         bashHubConfigurationFolder=$HOME/.bashhub &&
@@ -78,7 +81,7 @@ initialize_workspace() {
     if [ ! -h "$userDownloadsFolder" ]; then
         ln -s downloads "$userDownloadsFolder"
     fi &&
-    cd "$script_dir" &&
+    cd "$SCRIPT_DIR" &&
     if [ -f ./copyConfigurations.bash ]; then
         if ./copyConfigurations.bash; then
             if [ -f /workspace/configurations-private/.gitconfig ]; then
