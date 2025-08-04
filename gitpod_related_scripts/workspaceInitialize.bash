@@ -106,16 +106,6 @@ initialize_workspace() {
     source /home/gitpod/.bashrc
 }
 
-post_initialize() {
-
-    echo "This is post_initialize from ${BASH_SOURCE[0]}"
-}
-
-main_function() {
-    initialize_workspace
-    post_initialize
-}
-
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    main_function
+    initialize_workspace
 fi
