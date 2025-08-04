@@ -21,7 +21,7 @@ script_dir="$(dirname "$(realpath "$0")")" &&
                 mkdir "$bashHubConfigurationFolder"
             fi &&
             bashHubConfigurationPath=$bashHubConfigurationFolder/config &&
-            printf "[bashhub]\naccess_token = $(echo $BASH_HUB_ACCESS_TOKEN)\nsystem_name = $(echo $BASH_HUB_SYSTEM_NAME)" >$bashHubConfigurationPath &&
+            printf "[bashhub]\naccess_token = %s\nsystem_name = %s\n" "$BASH_HUB_ACCESS_TOKEN" "$BASH_HUB_SYSTEM_NAME" >"$bashHubConfigurationPath" &&
             cd /workspace &&
             curl -OL https://bashhub.com/setup &&
             sed -z 's+\n        if ! ../env/bin/bashhub util update_system_info; then\n            # Run setup if we run into any issues updating our system info\n            ../env/bin/bashhub setup\n        fi++' -i setup &&
