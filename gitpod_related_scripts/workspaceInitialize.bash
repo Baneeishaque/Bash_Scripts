@@ -14,11 +14,11 @@ append_to_bashrc() {
 }
 
 script_dir="$(dirname "$(realpath "$0")")" &&
-    eval $(gp env -e) &&
+    eval "$(gp env -e)" &&
     if [ -v BASH_HUB_ACCESS_TOKEN ] && [ -v BASH_HUB_SYSTEM_NAME ]; then
         bashHubConfigurationFolder=$HOME/.bashhub &&
-            if [ ! -d $bashHubConfigurationFolder ]; then
-                mkdir $bashHubConfigurationFolder
+            if [ ! -d "$bashHubConfigurationFolder" ]; then
+                mkdir "$bashHubConfigurationFolder"
             fi &&
             bashHubConfigurationPath=$bashHubConfigurationFolder/config &&
             printf "[bashhub]\naccess_token = $(echo $BASH_HUB_ACCESS_TOKEN)\nsystem_name = $(echo $BASH_HUB_SYSTEM_NAME)" >$bashHubConfigurationPath &&
@@ -56,15 +56,15 @@ script_dir="$(dirname "$(realpath "$0")")" &&
         ln -s vscode-insider-user-data "$vscodeInsiderUserData"
     fi &&
     vscodeUserFolder=~/.vscode-insiders &&
-    if [ ! -d $vscodeUserFolder ]; then
-        mkdir $vscodeUserFolder
+    if [ ! -d "$vscodeUserFolder" ]; then
+        mkdir "$vscodeUserFolder"
     fi &&
     if [ ! -d vscode-insider-extensions ]; then
         mkdir vscode-insider-extensions
     fi &&
     vscodeUserExtensionsFolder=$vscodeUserFolder/extensions &&
-    if [ ! -h $vscodeUserExtensionsFolder ]; then
-        ln -s vscode-insider-extensions $vscodeUserExtensionsFolder
+    if [ ! -h "$vscodeUserExtensionsFolder" ]; then
+        ln -s vscode-insider-extensions "$vscodeUserExtensionsFolder"
     fi &&
     if [ ! -d downloads ]; then
         mkdir downloads
