@@ -13,7 +13,8 @@ append_to_bashrc() {
     fi
 }
 
-script_dir="$(dirname "$(realpath "$0")")" &&
+initialize_workspace() {
+    script_dir="$(dirname "$(realpath "$0")")" &&
     eval "$(gp env -e)" &&
     if [ -v BASH_HUB_ACCESS_TOKEN ] && [ -v BASH_HUB_SYSTEM_NAME ]; then
         bashHubConfigurationFolder=$HOME/.bashhub &&
@@ -100,4 +101,18 @@ script_dir="$(dirname "$(realpath "$0")")" &&
     else
         echo "Error: copyConfigurations.bash does not exist."
     fi &&
-    source ~/.bashrc
+    source /home/gitpod/.bashrc
+}
+
+post_initialize() {
+    echo "This is post_initialize function."
+}
+
+main_function() {
+    initialize_workspace
+    post_initialize
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main_function
+fi
