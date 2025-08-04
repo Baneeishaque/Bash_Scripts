@@ -30,9 +30,11 @@
     "vscode.html",
     "vscode.html-language-features",
     "vscode.json",
+    "vscode.json-language-features",
     "vscode.markdown",
     "vscode.markdown-language-features",
     "vscode.merge-conflict",
+    "vscode.references-view",
     "vscode.search-result",
     "vscode.shellscript",
     "vscode.terminal-suggest"
