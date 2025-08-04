@@ -18,6 +18,7 @@
     "semanticdiff.semanticdiff",
     "sleistner.vscode-fileutils",
     "TaichiKubo.dired-plus",
+    "timonwong.shellcheck",
     "vscode.configuration-editing",
     "vscode.git",
     "vscode.git-base",
@@ -29,7 +30,7 @@
     "vscode.merge-conflict",
     "vscode.search-result",
     "vscode.shellscript",
-    "vscode.terminal-suggest",
-    "timonwong.shellcheck"
+    "vscode.terminal-suggest"
   ]
 }
+
