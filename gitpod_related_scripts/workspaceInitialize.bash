@@ -107,7 +107,8 @@ initialize_workspace() {
 }
 
 post_initialize() {
-    echo "This is post_initialize function."
+
+    echo "This is post_initialize from ${BASH_SOURCE[0]}"
 }
 
 main_function() {
