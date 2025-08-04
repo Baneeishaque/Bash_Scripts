@@ -80,8 +80,7 @@ initialize_workspace() {
     fi &&
     cd "$script_dir" &&
     if [ -f ./copyConfigurations.bash ]; then
-        ./copyConfigurations.bash
-        if [ $? -eq 0 ]; then
+        if ./copyConfigurations.bash; then
             if [ -f /workspace/configurations-private/.gitconfig ]; then
                 . ../installGitHubCli.bash
                 . ../installGitLabCli.bash
