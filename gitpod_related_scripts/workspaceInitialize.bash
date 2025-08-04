@@ -51,6 +51,10 @@ script_dir="$(dirname "$(realpath "$0")")" &&
     if [ ! -d vscode-insider-user-data ]; then
         mkdir vscode-insider-user-data
     fi &&
+    homeConfigurationFolder="$HOME/.config" &&
+    if [ ! -d "$homeConfigurationFolder" ]; then
+        mkdir "$homeConfigurationFolder"
+    fi &&
     vscodeInsiderUserData="$HOME/.config/Code - Insiders" &&
     if [ ! -h "$vscodeInsiderUserData" ]; then
         ln -s vscode-insider-user-data "$vscodeInsiderUserData"
@@ -78,9 +82,9 @@ script_dir="$(dirname "$(realpath "$0")")" &&
         ./copyConfigurations.bash
         if [ $? -eq 0 ]; then
             if [ -f /workspace/configurations-private/.gitconfig ]; then
-                rm -f ~/.gitconfig
                 . ../installGitHubCli.bash
                 . ../installGitLabCli.bash
+                rm -f ~/.gitconfig
                 ln -s /workspace/configurations-private/.gitconfig ~/.gitconfig
                 if [ -f ~/.gitconfig ]; then
                     echo "Link to .gitconfig created successfully."

@@ -9,13 +9,13 @@ cleanup_homebrew() {
     install_homebrew
 
     echo "Running brew autoremove..."
-    if ! brew autoremove; then
+    if ! /home/linuxbrew/.linuxbrew/bin/brew autoremove; then
         echo "Error: brew autoremove failed."
         return 1
     fi
 
     echo "Running brew cleanup..."
-    if ! brew cleanup; then
+    if ! /home/linuxbrew/.linuxbrew/bin/brew cleanup; then
         echo "Error: brew cleanup failed."
         return 1
     fi

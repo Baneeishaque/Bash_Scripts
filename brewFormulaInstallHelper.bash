@@ -14,10 +14,10 @@ installBrewFormula() {
     fi
 
     local use_cask=${2:-false}
-    local install_cmd="brew install"
+    local install_cmd="/home/linuxbrew/.linuxbrew/bin/brew install"
 
     if [ "$use_cask" = "true" ]; then
-        install_cmd="brew install --cask"
+        install_cmd="/home/linuxbrew/.linuxbrew/bin/brew install --cask"
     fi
 
     echo "Updating Homebrew..."
