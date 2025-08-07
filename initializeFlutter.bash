@@ -29,7 +29,7 @@ initialize_flutter() {
         . /etc/lsb-release
         if [[ "$DISTRIB_ID" == "Ubuntu" ]]; then
 
-            aptInstallHelper "clang cmake git ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev"
+            aptInstall "clang cmake git ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev"
 
             fvm spawn "$user_version" build linux
         fi
