@@ -106,6 +106,10 @@ initialize_workspace() {
     else
         echo "Error: copyConfigurations.bash does not exist."
     fi &&
+    mkdir -p /workspace/{homebrew-cache,mise-cache,mise-data,apt-cache} &&
+    chown -R gitpod:gitpod /workspace/homebrew-cache &&
+    chmod -R 755 /workspace/homebrew-cache &&
+    chown -R gitpod:gitpod /workspace/{mise-cache,mise-data} &&
     source /home/gitpod/.bashrc
 }
 
