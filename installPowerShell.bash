@@ -1,11 +1,22 @@
 #!/bin/bash
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+install_power_shell() {
 
-VERSION_ID=$(sudo grep -oP 'VERSION_ID="\K[^"]+' /etc/os-release)
-wget -q "https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb"
-. "$SCRIPT_DIR/updatePackageIndex.bash"
-sudo apt install -y ./packages-microsoft-prod.deb
-. "$SCRIPT_DIR/updatePackageIndex.bash"
-sudo apt install -y powershell
-rm packages-microsoft-prod.deb
+    local SCRIPT_DIR
+    local VERSION_ID
+
+    source "$SCRIPT_DIR/aptInstallHelper.bash"
+    
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    VERSION_ID=$(sudo grep -oP 'VERSION_ID="\K[^"]+' /etc/os-release)
+    wget -q "https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb"
+    . "$SCRIPT_DIR/updatePackageIndex.bash"
+    aptInstall "./packages-microsoft-prod.deb"
+    . "$SCRIPT_DIR/updatePackageIndex.bash"
+    aptInstall powershell
+    rm packages-microsoft-prod.deb
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    install_power_shell
+fi
