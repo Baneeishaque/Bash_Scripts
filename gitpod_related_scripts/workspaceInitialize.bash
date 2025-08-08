@@ -68,12 +68,13 @@ initialize_workspace() {
     if [ ! -d "$vscodeUserFolder" ]; then
         mkdir "$vscodeUserFolder"
     fi &&
-    if [ ! -d vscode-insider-extensions ]; then
-        mkdir vscode-insider-extensions
+    vscodeInsiderExtensionsFolder="vscode-insider-extensions" &&
+    if [ ! -d "$vscodeInsiderExtensionsFolder" ]; then
+        mkdir "$vscodeInsiderExtensionsFolder"
     fi &&
-    vscodeUserExtensionsFolder=$vscodeUserFolder/extensions &&
+    vscodeUserExtensionsFolder="$vscodeUserFolder/extensions" &&
     if [ ! -h "$vscodeUserExtensionsFolder" ]; then
-        ln -s vscode-insider-extensions "$vscodeUserExtensionsFolder"
+        ln -s "$vscodeInsiderExtensionsFolder" "$vscodeUserExtensionsFolder"
     fi &&
     if [ ! -d downloads ]; then
         mkdir downloads
