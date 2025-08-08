@@ -52,8 +52,9 @@ initialize_workspace() {
     if [ -v AZURE_DEVOPS_EXT_PAT ]; then
         append_to_bashrc AZURE_DEVOPS_EXT_PAT "$AZURE_DEVOPS_EXT_PAT"
     fi &&
-    if [ ! -d vscode-insider-user-data ]; then
-        mkdir vscode-insider-user-data
+    vscodeInsiderUserDataFolder="vscode-insider-user-data" &&
+    if [ ! -d "$vscodeInsiderUserDataFolder" ]; then
+        mkdir "$vscodeInsiderUserDataFolder"
     fi &&
     homeConfigurationFolder="$HOME/.config" &&
     if [ ! -d "$homeConfigurationFolder" ]; then
@@ -61,7 +62,7 @@ initialize_workspace() {
     fi &&
     vscodeInsiderUserData="$HOME/.config/Code - Insiders" &&
     if [ ! -h "$vscodeInsiderUserData" ]; then
-        ln -s vscode-insider-user-data "$vscodeInsiderUserData"
+        ln -s "$vscodeInsiderUserDataFolder" "$vscodeInsiderUserData"
     fi &&
     vscodeUserFolder=~/.vscode-insiders &&
     if [ ! -d "$vscodeUserFolder" ]; then
