@@ -15,7 +15,7 @@ install_homebrew() {
         local BREW_EVAL_CMD="$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
         addToBashConfiguration "eval $BREW_EVAL_CMD"
         source ~/.bashrc
-        aptInstall build-essential
+        aptInstall "build-essential procps curl file git"
         installBrewFormula gcc
     else
         echo "Homebrew is already installed."
