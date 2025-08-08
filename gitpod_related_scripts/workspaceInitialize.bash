@@ -76,12 +76,13 @@ initialize_workspace() {
     if [ ! -h "$vscodeUserExtensionsFolder" ]; then
         ln -s "$vscodeInsiderExtensionsFolder" "$vscodeUserExtensionsFolder"
     fi &&
-    if [ ! -d downloads ]; then
-        mkdir downloads
+    downloadsFolder="downloads" &&
+    if [ ! -d "$downloadsFolder" ]; then
+        mkdir "$downloadsFolder"
     fi &&
     userDownloadsFolder="$HOME/Downloads" &&
     if [ ! -h "$userDownloadsFolder" ]; then
-        ln -s downloads "$userDownloadsFolder"
+        ln -s "$downloadsFolder" "$userDownloadsFolder"
     fi &&
     cd "$SCRIPT_DIR" &&
     if [ -f ./copyConfigurations.bash ]; then
