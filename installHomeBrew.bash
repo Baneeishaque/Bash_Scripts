@@ -11,11 +11,11 @@ install_homebrew() {
 
     if ! command -v /home/linuxbrew/.linuxbrew/bin/brew &>/dev/null; then
         echo "Homebrew not found. Installing Homebrew..."
+        aptInstall "build-essential procps curl file git"
         echo | bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         local BREW_EVAL_CMD="$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
         addToBashConfiguration "eval $BREW_EVAL_CMD"
         source ~/.bashrc
-        aptInstall "build-essential procps curl file git"
         installBrewFormula gcc
     else
         echo "Homebrew is already installed."
