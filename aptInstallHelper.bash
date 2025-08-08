@@ -12,7 +12,6 @@ aptInstall() {
   local SCRIPT_DIR
 
   SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-  source "$SCRIPT_DIR/addToBashConfigurationHelper.bash"
 
   if [ -z "$1" ]; then
     echo "Error: No package name(s) provided."
