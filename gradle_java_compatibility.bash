@@ -43,8 +43,7 @@ install_jdks_based_on_gradle_version() {
         fi
     fi
 
-    # Fetch and parse compatibility data
-    echo "Fetching compatibility information..."
+    echo "Fetching Gradle-Java compatibility information…"
     local html_content=$(curl -sf https://docs.gradle.org/current/userguide/compatibility.html)
 
     # Local associative arrays for compatibility data
@@ -87,14 +86,28 @@ install_jdks_based_on_gradle_version() {
         fi
     done
 
-    # Install and verify JDKs
-    echo "Installing JDKs via mise..."
+    echo
+    echo "Java ↔ Gradle Compatibility Table:"
+    for jdk in "${sorted_jdks[@]}"; do
+        echo "  Java $jdk → compile w/ Gradle ${compile_gradle_map[$jdk]}, run w/ Gradle ${runtime_gradle_map[$jdk]}"
+    done
+
+    echo
+    echo "For Gradle $gradleVersion:"
+    echo "  • Minimum Java to compile your build: $compile_jdk"
+    echo "  • Minimum Java to run Gradle itself:  $run_jdk"
+
+    echo "Installing Java $compile_jdk and Java $run_jdk via mise…"
     mise install java@"$compile_jdk" && mise use java@"$compile_jdk"
     mise install java@"$run_jdk" && mise use java@"$run_jdk"
 
-    echo -e "\nValidation:"
-    echo "Compile JDK: $(java --version 2>&1 | head -1)"
-    echo "Runtime JDK: $(java --version 2>&1 | head -1)"
+    echo
+    echo "Check compile-JDK version directly:"
+    mise exec java@"$compile_jdk" -- java --version
+
+    echo
+    echo "Check run-JDK version directly:"
+    mise exec java@"$run_jdk" -- java --version
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
