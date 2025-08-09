@@ -17,7 +17,7 @@ setup_sdkmanager() {
         export ANDROID_HOME=$android_home
 
         # Make it permanent
-        update_zprofile "ANDROID_HOME" "$android_home"
+        # update_zprofile "ANDROID_HOME" "$android_home"
     }
 
     # Function to set JAVA_HOME temporarily
