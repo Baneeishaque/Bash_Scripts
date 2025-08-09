@@ -47,7 +47,7 @@ setup_sdkmanager() {
     # Check if sdkmanager is available
     if command -v sdkmanager &>/dev/null; then
         set_android_home
-        install_android_studio
+        # install_android_studio
         enable_licenses
         install_android_components
     else
