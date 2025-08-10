@@ -1,11 +1,17 @@
 #!/bin/bash
 
 installRemoteDeb() {
-    local downloadUrl=$1
-    local installationFile="package.deb"
-    
+
+    local downloadUrl
+    local installationFile
+    local SCRIPT_DIR
+
+    downloadUrl=$1
+    installationFile="package.deb"
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
     wget -O "$installationFile" "$downloadUrl"
-    ./updatePackageIndex.bash
+    "$SCRIPT_DIR/updatePackageIndex.bash"
     sudo apt install -y "./$installationFile"
     rm "$installationFile"
 }
