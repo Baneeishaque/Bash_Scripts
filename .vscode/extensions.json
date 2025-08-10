@@ -4,7 +4,6 @@
     "donjayamanne.githistory",
     "eamodio.gitlens",
     "fittentech.fitten-code",
-    "foxundermoon.shell-format",
     "github.copilot",
     "github.copilot-chat",
     "github.vscode-pull-request-github",
@@ -19,7 +18,6 @@
     "moshfeu.diff-merge",
     "nick-rudenko.back-n-forth",
     "pkief.material-icon-theme",
-    "quentinguidee.gitignore-ultimate",
     "rogalmic.bash-debug",
     "ryu1kn.partial-diff",
     "semanticdiff.semanticdiff",
@@ -41,6 +39,12 @@
     "vscode.search-result",
     "vscode.shellscript",
     "vscode.terminal-suggest"
+  ],
+  "additionalRecommendations": [
+    "foxundermoon.shell-format"
+  ],
+  "onlyDesktopSupported": [
+    "quentinguidee.gitignore-ultimate"
   ]
 }
 
