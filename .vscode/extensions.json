@@ -7,7 +7,6 @@
     "github.copilot",
     "github.copilot-chat",
     "github.vscode-pull-request-github",
-    "Google.geminicodeassist",
     "hashhar.gitattributes",
     "jannek-aalto.shell-function-outline",
     "jq-syntax-highlighting.jq-syntax-highlighting",
@@ -23,7 +22,6 @@
     "semanticdiff.semanticdiff",
     "sleistner.vscode-fileutils",
     "solomonkinard.git-files",
-    "TaichiKubo.dired-plus",
     "timonwong.shellcheck",
     "vscode.configuration-editing",
     "vscode.git",
@@ -41,7 +39,9 @@
     "vscode.terminal-suggest"
   ],
   "additionalRecommendations": [
-    "foxundermoon.shell-format"
+    "foxundermoon.shell-format",
+    "Google.geminicodeassist",
+    "TaichiKubo.dired-plus"
   ],
   "onlyDesktopSupported": [
     "quentinguidee.gitignore-ultimate"
