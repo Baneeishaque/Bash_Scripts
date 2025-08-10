@@ -22,6 +22,7 @@ aptInstall() {
   . "$SCRIPT_DIR/updatePackageIndex.bash"
 
   echo "Installing package(s): $1"
+  # shellcheck disable=SC2086
   sudo apt install -y $1
 
   if [ $? -eq 0 ]; then
