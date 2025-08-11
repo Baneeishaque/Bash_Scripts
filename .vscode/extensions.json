@@ -42,8 +42,8 @@
   ],
   "additionalRecommendations": [
     "foxundermoon.shell-format",
-    "Google.geminicodeassist",
-    "TaichiKubo.dired-plus"
+    "google.geminicodeassist",
+    "taichikubo.dired-plus"
   ],
   "onlyDesktopSupported": [
     "quentinguidee.gitignore-ultimate"
