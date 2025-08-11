@@ -41,6 +41,7 @@
     "github.copilot-chat"
   ],
   "additionalRecommendations": [
+    "continue.continue",
     "foxundermoon.shell-format",
     "google.geminicodeassist",
     "taichikubo.dired-plus"
