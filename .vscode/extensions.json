@@ -4,8 +4,6 @@
     "donjayamanne.githistory",
     "eamodio.gitlens",
     "fittentech.fitten-code",
-    "github.copilot",
-    "github.copilot-chat",
     "github.vscode-pull-request-github",
     "hashhar.gitattributes",
     "jannek-aalto.shell-function-outline",
@@ -37,6 +35,10 @@
     "vscode.search-result",
     "vscode.shellscript",
     "vscode.terminal-suggest"
+  ],
+    "onlyVscodeSupported": [
+    "github.copilot",
+    "github.copilot-chat"
   ],
   "additionalRecommendations": [
     "foxundermoon.shell-format",
