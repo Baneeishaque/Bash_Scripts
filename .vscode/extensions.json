@@ -7,7 +7,6 @@
     "hashhar.gitattributes",
     "jannek-aalto.shell-function-outline",
     "jq-syntax-highlighting.jq-syntax-highlighting",
-    "lang2hong.githd",
     "mads-hartmann.bash-ide-vscode",
     "mhutchie.git-graph",
     "moshfeu.compare-folders",
@@ -17,7 +16,6 @@
     "ryu1kn.partial-diff",
     "semanticdiff.semanticdiff",
     "sleistner.vscode-fileutils",
-    "solomonkinard.git-files",
     "timonwong.shellcheck",
     "vscode.configuration-editing",
     "vscode.git",
@@ -37,6 +35,10 @@
   "onlyVscodeSupported": [
     "github.copilot",
     "github.copilot-chat"
+  ],
+  "onlyGitpodSupported": [
+    "lang2hong.githd",
+    "solomonkinard.git-files"
   ],
   "additionalRecommendations": [
     "continue.continue",
