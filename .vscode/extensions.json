@@ -3,7 +3,6 @@
     "beaglefoot.awk-ide-vscode",
     "donjayamanne.githistory",
     "eamodio.gitlens",
-    "fittentech.fitten-code",
     "github.vscode-pull-request-github",
     "hashhar.gitattributes",
     "jannek-aalto.shell-function-outline",
@@ -13,7 +12,6 @@
     "mhutchie.git-graph",
     "moshfeu.compare-folders",
     "moshfeu.diff-merge",
-    "nick-rudenko.back-n-forth",
     "pkief.material-icon-theme",
     "rogalmic.bash-debug",
     "ryu1kn.partial-diff",
@@ -49,5 +47,10 @@
   ],
   "onlyDesktopSupported": [
     "quentinguidee.gitignore-ultimate"
+  ],
+  "gitpodAlternativeRecommendations": [
+    "fittentech.fitten-code",
+    "nick-rudenko.back-n-forth",
+    "vscode.github-authentication"
   ]
 }
