@@ -34,7 +34,7 @@
     "vscode.shellscript",
     "vscode.terminal-suggest"
   ],
-    "onlyVscodeSupported": [
+  "onlyVscodeSupported": [
     "github.copilot",
     "github.copilot-chat"
   ],
