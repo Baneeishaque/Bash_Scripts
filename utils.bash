@@ -90,10 +90,10 @@ TOOL_WHICH="which"
 TOOL_YARN="yarn"
 TOOL_ZIP="zip"
 
-SCRIPT_INSTALL_TREE="installTree.bash"
-SCRIPT_INSTALL_GH="installGitHubCli.bash"
-SCRIPT_UPDATE_PACKAGE_INDEX="updatePackageIndex.bash"
 SCRIPT_APT_INSTALL_HELPER="aptInstallHelper.bash"
+SCRIPT_INSTALL_GH="installGitHubCli.bash"
+SCRIPT_INSTALL_TREE="installTree.bash"
+SCRIPT_UPDATE_PACKAGE_INDEX="updatePackageIndex.bash"
 
 ensure_timeout_cmd() {
     if [[ -n "${TIMEOUT_CMD:-}" ]]; then return; fi  # Already set
