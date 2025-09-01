@@ -5,9 +5,9 @@ install_power_shell() {
     local SCRIPT_DIR
     local VERSION_ID
 
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     source "$SCRIPT_DIR/aptInstallHelper.bash"
     
-    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     VERSION_ID=$(sudo grep -oP 'VERSION_ID="\K[^"]+' /etc/os-release)
     wget -q "https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb"
     . "$SCRIPT_DIR/updatePackageIndex.bash"
