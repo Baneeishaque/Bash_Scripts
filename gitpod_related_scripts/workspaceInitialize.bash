@@ -52,38 +52,38 @@ initialize_workspace() {
     if [ -v AZURE_DEVOPS_EXT_PAT ]; then
         append_to_bashrc AZURE_DEVOPS_EXT_PAT "$AZURE_DEVOPS_EXT_PAT"
     fi &&
-    vscodeInsiderUserDataFolder="vscode-insider-user-data" &&
-    if [ ! -d "$vscodeInsiderUserDataFolder" ]; then
-        mkdir "$vscodeInsiderUserDataFolder"
-    fi &&
-    homeConfigurationFolder="$HOME/.config" &&
-    if [ ! -d "$homeConfigurationFolder" ]; then
-        mkdir "$homeConfigurationFolder"
-    fi &&
-    vscodeInsiderUserData="$HOME/.config/Code - Insiders" &&
-    if [ ! -h "$vscodeInsiderUserData" ]; then
-        ln -s "$vscodeInsiderUserDataFolder" "$vscodeInsiderUserData"
-    fi &&
-    vscodeUserFolder=~/.vscode-insiders &&
-    if [ ! -d "$vscodeUserFolder" ]; then
-        mkdir "$vscodeUserFolder"
-    fi &&
-    vscodeInsiderExtensionsFolder="vscode-insider-extensions" &&
-    if [ ! -d "$vscodeInsiderExtensionsFolder" ]; then
-        mkdir "$vscodeInsiderExtensionsFolder"
-    fi &&
-    vscodeUserExtensionsFolder="$vscodeUserFolder/extensions" &&
-    if [ ! -h "$vscodeUserExtensionsFolder" ]; then
-        ln -s "$vscodeInsiderExtensionsFolder" "$vscodeUserExtensionsFolder"
-    fi &&
-    downloadsFolder="downloads" &&
-    if [ ! -d "$downloadsFolder" ]; then
-        mkdir "$downloadsFolder"
-    fi &&
-    userDownloadsFolder="$HOME/Downloads" &&
-    if [ ! -h "$userDownloadsFolder" ]; then
-        ln -s "$downloadsFolder" "$userDownloadsFolder"
-    fi &&
+    # vscodeInsiderUserDataFolder="vscode-insider-user-data" &&
+    # if [ ! -d "$vscodeInsiderUserDataFolder" ]; then
+    #     mkdir "$vscodeInsiderUserDataFolder"
+    # fi &&
+    # homeConfigurationFolder="$HOME/.config" &&
+    # if [ ! -d "$homeConfigurationFolder" ]; then
+    #     mkdir "$homeConfigurationFolder"
+    # fi &&
+    # vscodeInsiderUserData="$HOME/.config/Code - Insiders" &&
+    # if [ ! -h "$vscodeInsiderUserData" ]; then
+    #     ln -s "$vscodeInsiderUserDataFolder" "$vscodeInsiderUserData"
+    # fi &&
+    # vscodeUserFolder=~/.vscode-insiders &&
+    # if [ ! -d "$vscodeUserFolder" ]; then
+    #     mkdir "$vscodeUserFolder"
+    # fi &&
+    # vscodeInsiderExtensionsFolder="vscode-insider-extensions" &&
+    # if [ ! -d "$vscodeInsiderExtensionsFolder" ]; then
+    #     mkdir "$vscodeInsiderExtensionsFolder"
+    # fi &&
+    # vscodeUserExtensionsFolder="$vscodeUserFolder/extensions" &&
+    # if [ ! -h "$vscodeUserExtensionsFolder" ]; then
+    #     ln -s "$vscodeInsiderExtensionsFolder" "$vscodeUserExtensionsFolder"
+    # fi &&
+    # downloadsFolder="downloads" &&
+    # if [ ! -d "$downloadsFolder" ]; then
+    #     mkdir "$downloadsFolder"
+    # fi &&
+    # userDownloadsFolder="$HOME/Downloads" &&
+    # if [ ! -h "$userDownloadsFolder" ]; then
+    #     ln -s "$downloadsFolder" "$userDownloadsFolder"
+    # fi &&
     cd "$SCRIPT_DIR" &&
     if [ -f ./copyConfigurations.bash ]; then
         if ./copyConfigurations.bash; then
