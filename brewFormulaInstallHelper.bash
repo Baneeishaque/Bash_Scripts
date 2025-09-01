@@ -14,6 +14,7 @@ installBrewFormula() {
     fi
 
     local use_cask=${2:-false}
+    local create_link=${3:-false}
     local install_cmd="/home/linuxbrew/.linuxbrew/bin/brew install"
 
     if [ "$use_cask" = "true" ]; then
@@ -30,6 +31,20 @@ installBrewFormula() {
     if ! $install_cmd "$1"; then
         echo "Error: Formula installation failed."
         return 1
+    fi
+
+    if [ "$create_link" = "true" ]; then
+        echo "Creating symbolic link for $1..."
+        if [ -e "/usr/local/bin/$1" ]; then
+            echo "File already exists at /usr/local/bin/$1. Skipping link creation."
+        else
+            sudo ln -s "/home/linuxbrew/.linuxbrew/bin/$1" "/usr/local/bin/$1"
+            if [ $? -ne 0 ]; then
+                echo "Warning: Failed to create symbolic link for $1." >&2
+            else
+                echo "Symbolic link for $1 created successfully."
+            fi
+        fi
     fi
 
     echo "Cleaning up Homebrew..."
@@ -82,8 +97,9 @@ installBrewFormulaWithBashConfigurations() {
     fi
 
     local use_cask=${3:-false}
+    local create_link=${4:-false}
 
-    if installBrewFormula "$1" "$use_cask"; then
+    if installBrewFormula "$1" "$use_cask" "$create_link"; then
         addToBashConfiguration "$2"
     else
         echo "Installation of $1 failed. Skipping configuration update."
